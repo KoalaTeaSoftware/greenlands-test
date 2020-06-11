@@ -3,25 +3,46 @@ package framework.objects;
 import framework.ContextOfScenario;
 import framework.ContextOfTest;
 import framework.helpers.HtmlReport;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * This gives you access to many basic features common to all HTML pages in all browsers
  */
 public class HtmlPage {
+    private WebElement bodyTag;
+
     private WebDriver myDriver = null;
 
     public HtmlPage(WebDriver driver) {
         this.myDriver = driver;
 
-        awaitPageLoad(ContextOfTest.pageLoadWait);
+        waitForJavaScriptReadyStateComplete(ContextOfTest.pageLoadWait);
+        bodyTag = waitForElement(driver, By.tagName("BODY"), ContextOfTest.pageLoadWait);
+
         // this would be where you would initialise the page factory
         // PageFactory.initElements(driver, this);
     }
 
+    public static WebElement waitForElement(WebDriver myDriver, By givenBy, long waitFor) {
+        // https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/support/ui/WebDriverWait.html#WebDriverWait-org.openqa.selenium.WebDriver-long-
+        // the above link does not indicate that this particular call is deprecated
+        //noinspection deprecation
+        return new WebDriverWait(myDriver, waitFor)
+                // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
+                .until(ExpectedConditions.presenceOfElementLocated(givenBy));
+    }
+
     public String getPageTitle() {
         return myDriver.getTitle();
+    }
+
+    public WebElement getBodyTag() {
+        return bodyTag;
     }
 
     /**
@@ -38,7 +59,7 @@ public class HtmlPage {
      *
      * @param maxWaitSeconds -
      */
-    public void awaitPageLoad(int maxWaitSeconds) {
+    public void waitForJavaScriptReadyStateComplete(int maxWaitSeconds) {
         if (maxWaitSeconds == 0)
             return; // don't even create the executor
 

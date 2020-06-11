@@ -1,7 +1,6 @@
 package framework.helpers;
 
 import framework.ContextOfScenario;
-import io.cucumber.java.Scenario;
 
 public class HtmlReport {
     /**
@@ -17,12 +16,11 @@ public class HtmlReport {
      * As the different types of actor (browsers, of API) have different ways of
      * getting this info, we need to direct control to the right actor
      *
-     * @param scenario - found in the scenario context
-     * @param label    - what you want to see written in the report
+     * @param label - what you want to see written in the report
      */
-    public static void writeScreenShotToHtmlReport(Scenario scenario, String label) {
+    public static void writeScreenShotToHtmlReport(String label) {
         try {
-            ContextOfScenario.actor.embedScreenShot(scenario, label);
+            ContextOfScenario.actor.embedScreenShot(ContextOfScenario.scenario, label);
         } catch (Exception e) {
             // the actor could be null because the actor has not yet been defined
             // ToDo: this is not actually an error deserving of a full stack trace

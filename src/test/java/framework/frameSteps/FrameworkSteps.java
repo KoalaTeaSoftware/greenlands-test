@@ -72,19 +72,20 @@ public class FrameworkSteps {
 //    }
 
     @When("I use browser {string} to view the page at {string}")
-    public void iUseBrowserToViewThePageAt(String requesterBrowser, String requestedURL) {
+    public void iUseBrowserToViewThePageAt(String requestedBrowser, String requestedURL) {
+        //ToDo: if the requested URL does not contain a protocol, to just does nothing
         Actor.ActorType browserType = null;
-        if (requesterBrowser.length() == 0) {
+        if (requestedBrowser.length() == 0) {
             if (ContextOfTest.defaultBrowserType == null)
                 fail("If no browser is defined for this step and no default has be defined in the Test Framework Configuration");
             else
                 browserType = ContextOfTest.defaultBrowserType;
         } else {
             try {
-                browserType = Actor.ActorType.valueOf(requesterBrowser);
+                browserType = Actor.ActorType.valueOf(requestedBrowser);
             } catch (IllegalArgumentException e) {
                 e.printStackTrace();
-                fail("Unknown type of browser (" + requesterBrowser + ") has been requested");
+                fail("Unknown type of browser (" + requestedBrowser + ") has been requested");
             }
         }
         if (requestedURL.length() == 0) {
@@ -100,8 +101,8 @@ public class FrameworkSteps {
         ContextOfScenario.actor.getResource(requestedURL);
     }
 
-    @Then("the browser page title contains {string}")
-    public void theBrowserPageTitleContains(String requiredTitleContents) {
+    @Then("the browser page tab contains {string}")
+    public void theBrowserPageTabContains(String requiredTitleContents) {
         if (requiredTitleContents.length() == 0) {
             if (ContextOfTest.defaultUiPageTitleString.length() > 0)
                 requiredTitleContents = ContextOfTest.defaultUiPageTitleString;
