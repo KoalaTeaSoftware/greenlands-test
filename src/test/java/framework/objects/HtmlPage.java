@@ -41,6 +41,10 @@ public class HtmlPage {
         return myDriver.getTitle();
     }
 
+    public String getCurrentUrl() {
+        return myDriver.getCurrentUrl();
+    }
+
     public WebElement getBodyTag() {
         return bodyTag;
     }

@@ -8,7 +8,7 @@ Feature: Home Page
     Given I use browser "" to view the page at "http://stage.the-greenlands.com"
 
   Scenario: See the various components of the home page
-    Then the browser page tab contains "The Greenlands"
+    Then the title tag contains "The Greenlands"
     And the secondary nav links are present
     And the chapter images are present
 

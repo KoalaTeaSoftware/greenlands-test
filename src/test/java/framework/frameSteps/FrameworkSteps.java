@@ -4,11 +4,13 @@ import framework.ActorFactory;
 import framework.ContextOfScenario;
 import framework.ContextOfTest;
 import framework.actors.Actor;
-import framework.objects.HtmlPage;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import objects.GreenlandsCommonPage;
 import org.junit.Assert;
 
+import static java.lang.Thread.sleep;
 import static org.junit.Assert.fail;
 
 /**
@@ -101,8 +103,8 @@ public class FrameworkSteps {
         ContextOfScenario.actor.getResource(requestedURL);
     }
 
-    @Then("the browser page tab contains {string}")
-    public void theBrowserPageTabContains(String requiredTitleContents) {
+    @Then("the title tag contains {string}")
+    public void theTitleTagContains(String requiredTitleContents) {
         if (requiredTitleContents.length() == 0) {
             if (ContextOfTest.defaultUiPageTitleString.length() > 0)
                 requiredTitleContents = ContextOfTest.defaultUiPageTitleString;
@@ -111,12 +113,68 @@ public class FrameworkSteps {
             }
         }
 
-        HtmlPage thePage = new HtmlPage(ContextOfScenario.actor.getDriver());
+        GreenlandsCommonPage thePage = new GreenlandsCommonPage(ContextOfScenario.actor.getDriver());
 
         Assert.assertTrue(
-                "The page title (" + thePage.getPageTitle() + ") should contain (" + requiredTitleContents + ")",
-                thePage.getPageTitle().contains(requiredTitleContents)
+                "The page title :" + thePage.getPageTitle() + ": should contain :" + requiredTitleContents + ": (ignoring case)",
+                thePage.getPageTitle().toLowerCase().contains(requiredTitleContents.toLowerCase())
         );
+    }
+
+    @And("the current url contains {string}")
+    public void theCurrentUrlContains(String expected) {
+        GreenlandsCommonPage thePage = new GreenlandsCommonPage(ContextOfScenario.actor.getDriver());
+
+        int ms = 10000;
+        int freq = 100;
+
+        do {
+            if (thePage.getCurrentUrl().contains(expected))
+                break;
+            else {
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    //don't care
+                }
+            }
+            ms = ms - freq;
+        } while (ms > 0);
+
+        String actual = thePage.getCurrentUrl();
+        Assert.assertTrue(
+                String.format("Expected the page URL :%s: to contain :%s:", actual, expected),
+                actual.contains(expected));
+    }
+
+
+    @And("the first header contains {string}")
+    public void theFirstHeaderContains(String arg0) {
+        GreenlandsCommonPage thePage = new GreenlandsCommonPage(ContextOfScenario.actor.getDriver());
+
+        String expected = arg0.toLowerCase();
+        String actual = "";
+
+        int ms = 30000;
+        int freq = 100;
+
+        do {
+            actual = thePage.headerTag.getText().toLowerCase();
+            if (actual.contains(expected))
+                break;
+            else {
+                try {
+                    sleep(10);
+                } catch (InterruptedException e) {
+                    //don't care
+                }
+            }
+            ms = ms - freq;
+        } while (ms > 0);
+
+        Assert.assertTrue(
+                String.format("Expected the page's main heading :%s: to contain :%s:", actual, expected),
+                actual.contains(expected));
     }
 }
 
