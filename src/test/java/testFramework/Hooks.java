@@ -4,8 +4,8 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
-import static testFramework.helpers.HtmlReport.writePageSourceToHtmlReport;
-import static testFramework.helpers.HtmlReport.writeScreenShotToHtmlReport;
+import static testFramework.helpers.Reports.writePageSourceToHtmlReport;
+import static testFramework.helpers.Reports.writeScreenShotToHtmlReport;
 
 public class Hooks {
     @Before

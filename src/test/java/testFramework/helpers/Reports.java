@@ -1,17 +1,26 @@
 package testFramework.helpers;
 
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import testFramework.Context;
 
-public class HtmlReport {
+public class Reports {
     /**
      * @param label - what you want to see written in the report
      */
     public static void writeScreenShotToHtmlReport(String label) {
         try {
-            Context.scenario.write(label);
+            TakesScreenshot ts = (TakesScreenshot) Context.defaultDriver;
+            byte[] screenshot = ts.getScreenshotAs(OutputType.BYTES);
+
+            Context.scenario.embed(screenshot, "image/png", label);
         } catch (Exception e) {
             writeToHtmlReport("Unable to capture the screenshot: " + e.getMessage());
         }
+    }
+
+    public static void writePageSourceToHtmlReport() {
+        writeToHtmlReport(Context.defaultDriver.getPageSource());
     }
 
     /**

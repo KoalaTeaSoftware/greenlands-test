@@ -5,15 +5,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePageObject extends GreenlandsCommonPage {
-
+    // housekeeping
     private final WebDriver myDriver;
 
-    private By chapterLink(String name) {return By.xpath("//*[@id='page-content']//a//h2[normalize-space(text())='" + name + "']");}
-
-    public HomePageObject(WebDriver driver) {
-        super(driver);
-        myDriver = driver;
-    }
+    // actions
 
     /**
      * Note the use of normalize() - It is most likely that the user's view of the link text is a normalised string,
@@ -36,4 +31,15 @@ public class HomePageObject extends GreenlandsCommonPage {
     public WebElement getImgForChapter(String chapterName) {
         return myDriver.findElement(By.xpath("//a[@id='" + chapterName.toLowerCase() + "Link']//img"));
     }
+
+    public HomePageObject(WebDriver driver) {
+        super(driver);
+        myDriver = driver;
+    }
+
+    // locations
+    private final By chapterLink(String name) {
+        return By.xpath("//*[@id='page-content']//a//h2[normalize-space(text())='" + name + "']");
+    }
+
 }

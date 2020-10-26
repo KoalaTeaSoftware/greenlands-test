@@ -45,16 +45,16 @@ public class Urls {
                     result += matcher.group(4).charAt(0) == '/' ? matcher.group(4) : '/' + matcher.group(4);
                 return result;
             } catch (NoSuchFieldException e) {
-                HtmlReport.writeToHtmlReport("Unable to supply a default scheme, or host");
+                Reports.writeToHtmlReport("Unable to supply a default scheme, or host");
                 throw e;
             }
         }
         // if we have got here, there has been a problem (e.g. unable to match, or get defaults (if needed))
-        HtmlReport.writeToHtmlReport("Unable to make a good URL out of >" + in + "<");
-        HtmlReport.writeToHtmlReport("Found this scheme: " + matcher.group(1));
-        HtmlReport.writeToHtmlReport("scheme's magic letters: " + matcher.group(2));
-        HtmlReport.writeToHtmlReport("Found this host: " + matcher.group(3));
-        HtmlReport.writeToHtmlReport("Found this reminder: " + matcher.group(4));
+        Reports.writeToHtmlReport("Unable to make a good URL out of >" + in + "<");
+        Reports.writeToHtmlReport("Found this scheme: " + matcher.group(1));
+        Reports.writeToHtmlReport("scheme's magic letters: " + matcher.group(2));
+        Reports.writeToHtmlReport("Found this host: " + matcher.group(3));
+        Reports.writeToHtmlReport("Found this reminder: " + matcher.group(4));
         throw new MalformedURLException();
     }
 }

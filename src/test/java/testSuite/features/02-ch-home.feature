@@ -1,17 +1,11 @@
+@functional
 Feature: Home Chapter
   This is the landing page for the site. It provide chapter navigation.
   There are various common elements, but these are their own feature
 
-  Scenario : HTML Compliance with W3C standards
-    Given the w3C HTML tester reviews the file ""
-    Then the w3c HTML tester reports compliance
-
-  Scenario : Check links on a page
-    Given the w3c link checker reviews the file ""
-    Then the w3c link checker reports compliance
-
   Scenario: Observe the secondary nav (at the base of the page)
   If this is missing, then it is likely that there has been a problem drawing this page
+  This may be verified elsewhere, but put it here so that this feature can be independent of other feature files
     Given I navigate to the page "<url>"
     Then the secondary nav links are present
 
@@ -36,3 +30,12 @@ Feature: Home Chapter
       |     | Music    | The Greenlands \| music    |
       |     | Stories  | The Greenlands \| stories  |
       |     | Medicine | The Greenlands \| medicine |
+
+  Scenario: HTML Compliance with W3C standards
+    Given the w3C HTML tester reviews the file ""
+    Then the w3c HTML tester reports compliance
+
+  Scenario: Check links on a page
+    Given the w3c link checker reviews the file ""
+    Then the w3c link checker reports compliance
+

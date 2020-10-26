@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
-import testFramework.helpers.HtmlReport;
+import testFramework.helpers.Reports;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -65,7 +65,7 @@ public class WebPageObj {
                     state = js.executeScript("return document.readyState").toString();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    HtmlReport.writeToHtmlReport("Failed to get document state " + e.getMessage());
+                    Reports.writeToHtmlReport("Failed to get document state " + e.getMessage());
                     // Right at the beginning, if the browser has got nothing yet.
                     // we may hit "org.openqa.selenium.JavascriptException: javascript error: Cannot read property 'outerHTML' of null"
                     // In this case, we do not stop waiting.
@@ -81,7 +81,7 @@ public class WebPageObj {
                 }
             }
         else {
-            HtmlReport.writeToHtmlReport("[warning] Unable to execute JavaScript to determine if page has loaded");
+            Reports.writeToHtmlReport("[warning] Unable to execute JavaScript to determine if page has loaded");
         }
     }
 

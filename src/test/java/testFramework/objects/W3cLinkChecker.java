@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
-import testFramework.helpers.HtmlReport;
+import testFramework.helpers.Reports;
 
 import java.time.Duration;
 
@@ -34,8 +34,8 @@ public class W3cLinkChecker {
         // the first h3 tells you the result
         if (Context.defaultDriver.findElement(By.tagName("h3")).getText().toLowerCase().contains("broken links")) {
             // it definitely says there is a problem
-            HtmlReport.writeToHtmlReport("Found evidence of broken links (an H3 saying just that)");
-            HtmlReport.writeToHtmlReport(Context.defaultDriver.findElement(By.tagName("dl")).getAttribute("innerHTML"));
+            Reports.writeToHtmlReport("Found evidence of broken links (an H3 saying just that)");
+            Reports.writeToHtmlReport(Context.defaultDriver.findElement(By.tagName("dl")).getAttribute("innerHTML"));
             return false;
         }
         // otherwise, hunt for the p that specifically indicates success
@@ -44,7 +44,7 @@ public class W3cLinkChecker {
                 return true;
         }
         // failing anything good, default to failure
-        HtmlReport.writeToHtmlReport("Failed to find evidence of success (a P saying just that)");
+        Reports.writeToHtmlReport("Failed to find evidence of success (a P saying just that)");
         return false;
     }
 }

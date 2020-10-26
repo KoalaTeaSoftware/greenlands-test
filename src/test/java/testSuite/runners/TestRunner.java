@@ -31,7 +31,7 @@ By default, Cucumber features/scenarios are run in the order:
         //        , tags = "@smoke"
         //        , tags = "@standards"
         , tags = "not (@smoke or @wip)"
-        //        ,dryRun = true
+//                ,dryRun = true
 )
 
 public class TestRunner {
