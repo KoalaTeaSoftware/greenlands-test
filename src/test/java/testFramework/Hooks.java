@@ -3,7 +3,9 @@ package testFramework;
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
-import testFramework.helpers.HtmlReport;
+
+import static testFramework.helpers.HtmlReport.writePageSourceToHtmlReport;
+import static testFramework.helpers.HtmlReport.writeScreenShotToHtmlReport;
 
 public class Hooks {
     @Before
@@ -16,7 +18,8 @@ public class Hooks {
     public void afterScenario(Scenario scenario) {
         // this may seem a bit involved, but a direct use of getStatus().equals does not yield the hoped-for result
         if (scenario.isFailed()) {
-            HtmlReport.writeScreenShotToHtmlReport("Screenshot taken because this scenario is marked as " + scenario.getStatus().toString());
+            writeScreenShotToHtmlReport("Screenshot taken because this scenario is marked as " + scenario.getStatus().toString());
+            writePageSourceToHtmlReport();
         }
         Context.defaultActor.closeDriver();
     }

@@ -2,6 +2,10 @@
   <dictionary name="goldt">
     <words>
       <w>appium</w>
+      <w>http://koalateasoftware.com</w>
+      <w>https://koalateasoftware.com</w>
+      <w>koalateasoftware</w>
+      <w>koalateasoftware.com/</w>
     </words>
   </dictionary>
 </component>

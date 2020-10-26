@@ -17,7 +17,7 @@ import java.time.Duration;
  * Things that all web pages contain / can do
  */
 public class WebPageObj {
-    private final WebDriver myDriver;
+    public final WebDriver myDriver;
 
     public WebPageObj(WebDriver driver) {
         this.myDriver = driver;
