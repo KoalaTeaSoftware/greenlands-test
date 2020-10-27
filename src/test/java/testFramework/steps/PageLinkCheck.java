@@ -14,7 +14,8 @@ import java.time.Duration;
 import static testFramework.helpers.Dates.humanReadableDuration;
 
 public class PageLinkCheck {
-    final Duration tout = Duration.ofSeconds(240); // the link checker can be quite slow
+    // the link checker can be quite slow, especially for the  bestiary list
+    final Duration tout = Duration.ofSeconds(480);
 
     private W3cLinkChecker w3cLinkChecker;
     private String url;
@@ -25,7 +26,7 @@ public class PageLinkCheck {
             url = Urls.interpretURL(urlOfFile);
             w3cLinkChecker = new W3cLinkChecker(url, tout);
         } catch (TimeoutException e) {
-            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout) + " seconds");
+            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout));
         } catch (MalformedURLException | NoSuchFieldException e) {
             Assert.fail("Failed to understand URL." + e.getMessage());
         }

@@ -27,20 +27,22 @@ public class WebPageSteps {
     }
 
     @Then("the page title is {string}")
-    public void thePageTitleIs(String expectedScheme) {
-        if (expectedScheme.isEmpty()) {
+    public void thePageTitleIs(String expectedTitle) {
+        if (expectedTitle.isEmpty()) {
             try {
-                expectedScheme = Context.sutConfiguration.getProperty("defaultTitle");
-            } catch (NoSuchFieldException ignored) {
+                expectedTitle = Context.sutConfiguration.getProperty("defaultTitle");
+            } catch (NoSuchFieldException e) {
+                Assert.fail("No expected header provided, and no default available either: " + e.getMessage());
             }
         }
-
-        Assert.assertEquals("The page title is not as expected", expectedScheme, getMyPage().readPageTitle());
+        // the page title test is often requested directly after a navigation click.
+        getMyPage().waitForTitleToBe(expectedTitle);
     }
 
     @And("the first heading is {string}")
     public void theFirstHeadingIs(String expected) {
-        Assert.assertEquals("Unexpected H1", expected, getMyPage().readFirstHeader());
+        // This test is often requested directly after a navigation click.
+        getMyPage().waitForFirstHeaderToBe(expected);
     }
 
     @And("the first heading does not contain {string}")

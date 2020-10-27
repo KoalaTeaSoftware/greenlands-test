@@ -5,8 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePageObject extends GreenlandsCommonPage {
-    // housekeeping
-    private final WebDriver myDriver;
+    public HomePageObject(WebDriver driver) { super(driver, By.xpath("//BODY[@id='home']")); }
+
+    // locators
+    private final By chapterLink(String name) {
+        return By.xpath("//*[@id='page-content']//a//h2[normalize-space(text())='" + name + "']");
+    }
 
     // actions
 
@@ -31,15 +35,4 @@ public class HomePageObject extends GreenlandsCommonPage {
     public WebElement getImgForChapter(String chapterName) {
         return myDriver.findElement(By.xpath("//a[@id='" + chapterName.toLowerCase() + "Link']//img"));
     }
-
-    public HomePageObject(WebDriver driver) {
-        super(driver);
-        myDriver = driver;
-    }
-
-    // locations
-    private final By chapterLink(String name) {
-        return By.xpath("//*[@id='page-content']//a//h2[normalize-space(text())='" + name + "']");
-    }
-
 }

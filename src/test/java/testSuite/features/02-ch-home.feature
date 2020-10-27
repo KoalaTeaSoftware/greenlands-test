@@ -6,19 +6,18 @@ Feature: Home Chapter
   Scenario: Observe the secondary nav (at the base of the page)
   If this is missing, then it is likely that there has been a problem drawing this page
   This may be verified elsewhere, but put it here so that this feature can be independent of other feature files
-    Given I navigate to the page "<url>"
+    Given I navigate to the page ""
     Then the secondary nav links are present
 
   Scenario: Observe the chapter images
   This is a minor risk as the image files are served up from a CDN provided through WordPress
-    Given I navigate to the page "<url>"
+    Given I navigate to the page ""
     Then the chapter images are present
 
   Scenario Outline: Follow chapter links and see that we get the right chapter
-  This differs from the 'broken links' testing in that it demonstrates that the links in the nav bar actually take you
+  The home page is, basically, a graphical chapter navigator
+  This testing differs from the 'broken links' testing in that it demonstrates that the links in the nav bar actually take you
   to where you want to be taken.
-  It is worth looking at a few pages, because relative links (if they are used) may work in some pages and not others.
-  This may not be the fastest, or most elegant way of doing this, but it is simple.
     Given I navigate to the page "<url>"
     When I go to the chapter called "<linkText>"
     Then the page title is "<expectedPageTitle>"

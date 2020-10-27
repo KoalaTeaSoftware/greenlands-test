@@ -4,16 +4,12 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.testng.asserts.SoftAssert;
 import testFramework.Context;
+import testSuite.objects.GreenlandsCommonPage;
 import testSuite.objects.HomePageObject;
 
 public class HomePageSteps {
-    private HomePageObject homePageObject;
-
-    private HomePageObject getMyPage() {
-        if (homePageObject == null)
-            homePageObject = new HomePageObject(Context.defaultDriver);
-        return homePageObject;
-    }
+    // Assume that all of the home page steps will run against a single home page
+    private HomePageObject homePageObject = new HomePageObject(Context.defaultDriver);
 
     @And("the chapter images are present")
     public void theChapterImagesArePresent() {
@@ -30,7 +26,7 @@ public class HomePageSteps {
 
         for (String thisChapter : chapters) {
             sa.assertTrue(
-                    getMyPage().browserShowsImage(getMyPage().getImgForChapter(thisChapter)),
+                    homePageObject.browserShowsImage(homePageObject.getImgForChapter(thisChapter)),
                     "Image for chapter " + thisChapter + " appears faulty.");
         }
         sa.assertAll();
@@ -38,6 +34,9 @@ public class HomePageSteps {
 
     @When("I go to the chapter called {string}")
     public void iGoToTheChapterCalled(String chapterName) {
-        getMyPage().getLinkForChapter(chapterName).click();
+        homePageObject.getLinkForChapter(chapterName).click();
+        // cause it to wait for the new page
+        GreenlandsCommonPage newPage = new GreenlandsCommonPage(Context.defaultDriver);
     }
+
 }
