@@ -5,10 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePageObject extends GreenlandsCommonPage {
-    public HomePageObject(WebDriver driver) { super(driver, By.xpath("//BODY[@id='home']")); }
+    public HomePageObject(WebDriver driver) {
+        super(driver); //use the default common page's diagnostic element
+    }
 
     // locators
-    private final By chapterLink(String name) {
+    private By chapterLink(String name) {
         return By.xpath("//*[@id='page-content']//a//h2[normalize-space(text())='" + name + "']");
     }
 

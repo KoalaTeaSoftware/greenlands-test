@@ -16,5 +16,4 @@ public class Framework {
     public void iFailATest() {
         Assert.fail("A deliberately failing test");
     }
-
 }

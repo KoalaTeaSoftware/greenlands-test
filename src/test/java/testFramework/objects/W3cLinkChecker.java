@@ -1,5 +1,6 @@
 package testFramework.objects;
 
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
 import testFramework.helpers.Reports;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.Duration;
 
 public class W3cLinkChecker {
@@ -15,16 +18,22 @@ public class W3cLinkChecker {
      * It is best to aim this directly at the single files that you create.
      * For example, Bootstrap's css invokes error messages (false negatives?) from this tester.
      *
-     * @param urlOfCssFile - make it a single file.Scheme is not necessary
+     * @param urlOfSubject - make it a single file.Scheme is not necessary
      */
-    public W3cLinkChecker(String urlOfCssFile, Duration tout) throws TimeoutException {
-        String sut = "https://validator.w3.org/checklink?uri=";
-        sut += urlOfCssFile;
-        sut += "&summary=on&hide_type=all&depth=&check=Check";
+    public W3cLinkChecker(String urlOfSubject, Duration tout) throws TimeoutException {
+        try {
+            String sut = "https://validator.w3.org/checklink?uri=";
+            sut += URLEncoder.encode(urlOfSubject, "UTF-8");
+            sut += "&summary=on&hide_type=all&depth=&check=Check";
 
-        Context.defaultActor.getResource(sut);
+            Context.defaultActor.getResource(sut);
 
-        new WebDriverWait(Context.defaultDriver, tout).until(ExpectedConditions.presenceOfElementLocated(By.tagName("H3")));
+            new WebDriverWait(Context.defaultDriver, tout).until(ExpectedConditions.presenceOfElementLocated(By.tagName("H3")));
+        } catch (UnsupportedEncodingException e) {
+            Assert.fail("Unable to encode URL" + e.getMessage());
+        } catch (TimeoutException e) {
+            Assert.fail("Unable Find results within the time " + tout + " " + e.getMessage());
+        }
     }
 
     /**

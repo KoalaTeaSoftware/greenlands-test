@@ -70,6 +70,7 @@ public class WebPageSteps {
         }
     }
 
+
     private WebPageObj getMyPage() {
         if (myPage == null)
             myPage = new WebPageObj(Context.defaultDriver);

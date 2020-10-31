@@ -12,6 +12,8 @@ import testFramework.helpers.Reports;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Things that all web pages contain / can do
@@ -45,6 +47,25 @@ public class WebPageObj {
     }
 
     public String readPageTitle() { return myDriver.getTitle(); }
+
+
+    /**
+     * @param tabIndex - staring at zero
+     * @return the contents of the title tag for the indexed tab
+     * @throws IndexOutOfBoundsException - if you ask for a tab that is not there
+     */
+    public String readPageTitle(int tabIndex) throws IndexOutOfBoundsException {
+        String newTitle;
+        List<String> browserTabs = new ArrayList<>(myDriver.getWindowHandles());
+
+        myDriver.switchTo().window(browserTabs.get(tabIndex));
+
+        newTitle = myDriver.getTitle();
+        myDriver.close();
+        myDriver.switchTo().window(browserTabs.get(0));
+
+        return newTitle;
+    }
 
     public String readFirstHeader() { return myDriver.findElement(firstHeaderLocator).getText(); }
 
