@@ -1,5 +1,5 @@
 @functional
-Feature: The Art Chapter
+Feature: Chapter: Art
   This page contains a few widget which have their own feature specification
 
   Scenario: HTML Compliance with W3C standards

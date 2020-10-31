@@ -1,5 +1,5 @@
 @functional
-Feature: Bestiary List - Overall
+Feature: Chapter: Bestiary: Overall
   This page is built by pulling feed from our own CMS and creating a list of synopses with links to the details
   So the main risks are that list items are malformed. Therefore, verifying syntactic structure goes a long way to
   determining that the page build was successful

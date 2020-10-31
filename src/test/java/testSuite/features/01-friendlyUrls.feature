@@ -1,5 +1,5 @@
 @functional
-Feature: Friendly URLs
+Feature: Infrastructure: Friendly URLs
   The site allows the use of (and only really responds to) friendly URLs.
 
   Scenario Outline: Try silly addresses (in the address bar)

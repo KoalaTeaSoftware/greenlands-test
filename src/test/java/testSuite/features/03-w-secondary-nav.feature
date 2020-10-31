@@ -1,5 +1,5 @@
 @functional
-Feature: Secondary Nav
+Feature: Widget: Secondary Nav
   This widget is a nav bar at the bottom of all pages
   It provides various features that the user may be interested in
 

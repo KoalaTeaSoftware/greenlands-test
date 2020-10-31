@@ -1,5 +1,5 @@
 @functional
-Feature: Bestiary List - Specificities
+Feature: Chapter: Bestiary: List
   This set of tests look in a bit more depth at the items on the page
 
   Background: Get us to that chapter

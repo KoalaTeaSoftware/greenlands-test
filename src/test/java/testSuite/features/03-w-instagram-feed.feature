@@ -1,5 +1,5 @@
 @functional
-Feature: Instagram Feed
+Feature: Widget: Instagram Feed
   This feed provides the four latest images from Rose's Greenlands Instagram
   This is provided from "https://the-greenlands.com/blog/category/eric/feed/"
   Currently the results can be seen on the Arts Page

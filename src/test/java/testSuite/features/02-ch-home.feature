@@ -1,5 +1,5 @@
 @functional
-Feature: Home Chapter
+Feature: Chapter: Home
   This is the landing page for the site. It provide chapter navigation.
   There are various common elements, but these are their own feature
 
