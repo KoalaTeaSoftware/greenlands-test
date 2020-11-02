@@ -3,6 +3,7 @@ package testSuite.objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import testFramework.helpers.WebElements;
 
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class BestiaryListPage extends GreenlandsCommonPage {
     }
 
     public boolean itemHasVideo(WebElement listIem) {
-        return testFramework.helpers.WebElements.elementExists(listIem, itemVideoList);
+        return WebElements.elementExists(listIem, itemVideoList);
     }
 
     public void followLinkWithText(String linkText) {

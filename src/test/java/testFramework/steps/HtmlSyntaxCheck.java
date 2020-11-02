@@ -32,6 +32,9 @@ public class HtmlSyntaxCheck {
 
     @Then("the w3c HTML tester reports compliance")
     public void theW3CHTMLTesterReportsCompliance() {
-        Assert.assertTrue(url + ": (unescaped) should be syntactically correct", w3cHtmlValidator.fileValidates());
+        if (!w3cHtmlValidator.fileValidates()) {
+            testFramework.helpers.Reports.writeToHtmlReport(w3cHtmlValidator.readResults());
+            Assert.fail();
+        }
     }
 }

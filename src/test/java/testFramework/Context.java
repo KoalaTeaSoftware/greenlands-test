@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import testFramework.actors.Actor;
 import testFramework.actors.ActorType;
+import testFramework.actors.Factory;
 import testFramework.helpers.ConfigReader;
 
 import java.io.IOException;
@@ -15,6 +16,7 @@ public class Context {
     // Maybe this should be implemented in another way, because IntelliJ think that this is a utility class
     @SuppressWarnings("InstantiationOfUtilityClass")
     private static final Context me = new Context();
+
     public static Scenario scenario;
     public static ActorType defaultActorType;
     public static Actor defaultActor;

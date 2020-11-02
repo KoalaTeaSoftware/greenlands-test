@@ -38,7 +38,8 @@ public class WebPageObj {
         waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
 
         new WebDriverWait(
-                Context.defaultDriver, Duration.ofSeconds(Context.pageLoadWait)
+                Context.defaultDriver,
+                Duration.ofSeconds(Context.pageLoadWait)
         ).until(
                 // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
                 ExpectedConditions.presenceOfElementLocated(diagnosticElement)

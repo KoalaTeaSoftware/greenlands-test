@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
         features = "src/test/java/testFramework/features", // a file path to the root of all features relevant to this runner
         glue = {
                 // a list of package names, not directly related to file paths
-                // the @Before and @After will not be run unless the package containing them is listed here
+                // the @Before and @After will not be run unless the _package_ containing them is listed here
                 "testFramework"
         },
         plugin = {

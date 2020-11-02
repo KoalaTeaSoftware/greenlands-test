@@ -4,17 +4,29 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.asserts.SoftAssert;
 import testFramework.Context;
 import testFramework.helpers.Urls;
-import testFramework.objects.WebPageObj;
+import testSuite.objects.GreenlandsCommonPage;
 
 import java.net.MalformedURLException;
+import java.util.List;
 
 /**
  * Steps that all HTML pages can support
  */
 public class WebPageSteps {
-    private WebPageObj myPage;
+    // This instance of the use of this set of steps is going to be working within the greenlands context, and some
+    // pages may be very slow, so adjust this type to make it specific for this test suite
+    private GreenlandsCommonPage myPage;
+
+    private GreenlandsCommonPage getMyPage() {
+        if (myPage == null)
+            myPage = new GreenlandsCommonPage(Context.defaultDriver);
+        return myPage;
+    }
 
     @Given("I navigate to the page {string}")
     public void iNavigateToThePage(String fullUrl) {
@@ -70,10 +82,19 @@ public class WebPageSteps {
         }
     }
 
+    @Then("all images are well drawn")
+    public void allImagesAreWellDrawn() {
+        List<WebElement> imageList = getMyPage().myDriver.findElements(By.tagName("img"));
+        SoftAssert sa = new SoftAssert();
+        int idx = 0;
 
-    private WebPageObj getMyPage() {
-        if (myPage == null)
-            myPage = new WebPageObj(Context.defaultDriver);
-        return myPage;
+        for (WebElement el : imageList) {
+            sa.assertTrue(
+                    myPage.browserShowsImage(el),
+                    "Image number " + idx + " seems not to have been drawn properly"
+            );
+            idx++;
+        }
+        sa.assertAll();
     }
 }

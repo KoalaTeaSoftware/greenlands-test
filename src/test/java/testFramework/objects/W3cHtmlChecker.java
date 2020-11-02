@@ -13,6 +13,8 @@ public class W3cHtmlChecker {
     private final By entryFieldLocator = By.id("uri");
     @SuppressWarnings("FieldCanBeLocal")
     private final By checkButtonLocator = By.className("submit");
+    @SuppressWarnings("FieldCanBeLocal")
+    private final By resultsBlockLocator = By.id("results");
 
     /**
      * It is best to aim this directly at the single files that you create.
@@ -55,5 +57,9 @@ public class W3cHtmlChecker {
         } catch (NoSuchElementException ignored) {
         }
         return false;
+    }
+
+    public String readResults() {
+        return Context.defaultDriver.findElement(resultsBlockLocator).getAttribute("innerHTML");
     }
 }

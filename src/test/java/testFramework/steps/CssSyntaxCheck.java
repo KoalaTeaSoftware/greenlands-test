@@ -33,6 +33,9 @@ public class CssSyntaxCheck {
 
     @Then("the w3c CSS tester reports compliance")
     public void theWCCSSTesterReportsCompliance() {
-        Assert.assertTrue("File :" + url + ": should be syntactically acceptable", w3cCssValidator.fileValidates());
+        if (!w3cCssValidator.fileValidates()) {
+            testFramework.helpers.Reports.writeToHtmlReport(w3cCssValidator.readResults());
+            Assert.fail("File :" + url + ": contains syntax errors.");
+        }
     }
 }

@@ -1,4 +1,4 @@
-@functional
+@functional @smoke
 Feature: Infrastructure: Friendly URLs
   The site allows the use of (and only really responds to) friendly URLs.
 

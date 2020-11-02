@@ -18,7 +18,8 @@ By default, Cucumber features/scenarios are run in the order:
         strict = true,
         features = "src/test/java/testSuite/features", // all of the features in the test suite
         glue = { // a list of package names, not directly related to file paths
-                "testFramework", // the @Before and @After will not be run unless the package containing them is listed here
+                "testFramework", // the @Before and @After will not be run unless the package containing them is listed
+                // here
                 "testSuite"
         },
         plugin = {
@@ -28,10 +29,11 @@ By default, Cucumber features/scenarios are run in the order:
                 // see https://gitlab.com/monochromata-de/cucumber-reporting-plugin
                 "de.monochromata.cucumber.report.PrettyReports:target/"
         }
+        //        , tags = ""
         //        , tags = "@smoke"
         //        , tags = "@standards"
         , tags = "not (@smoke or @wip)"
-//                ,dryRun = true
+        //        , dryRun = true
 )
 
 public class TestRunner {

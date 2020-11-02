@@ -11,6 +11,7 @@ Feature: Chapter: Home
 
   Scenario: Observe the chapter images
   This is a minor risk as the image files are served up from a CDN provided through WordPress
+  However, the images are pretty central to the worth of the page
     Given I navigate to the page ""
     Then the chapter images are present
 
