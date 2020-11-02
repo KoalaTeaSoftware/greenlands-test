@@ -5,7 +5,6 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import testFramework.actors.Actor;
 import testFramework.actors.ActorType;
-import testFramework.actors.Factory;
 import testFramework.helpers.ConfigReader;
 
 import java.io.IOException;
