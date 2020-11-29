@@ -3,12 +3,12 @@ package testFramework.actors;
 import org.openqa.selenium.WebDriver;
 
 public abstract class Actor {
-
     protected WebDriver driver;
 
     public Actor() {
         startService();
     }
+
 
     /**
      * Get the driver so you can do all of the interesting stuff that Selenium lets you do
@@ -35,16 +35,19 @@ public abstract class Actor {
             driver = null; // Essential to do this, else you keep getting the dead driver
         } else
             // maybe something has gone wrong with the framework?
-            System.out.println("[Warning] No driver to close");
+            System.out.println("[info] No driver to close");
     }
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Most of the different types of actor will have to do a different something at each of these points in the in the test lifecycle
     // So force them to be created
+
+    /**
+     * @param fullURL - of the page that you want to see. Can be relative
+     */
+    public void getResource(String fullURL) { getDriver().get(fullURL); }
+
     protected abstract void startService();
-
-    protected abstract void createDriver();
-
 
     // --Commented out by Inspection START (11/10/2020 20:28):
     //    /**
@@ -53,12 +56,12 @@ public abstract class Actor {
     //    protected abstract void stopService();
     // --Commented out by Inspection STOP (11/10/2020 20:28)
 
+    protected abstract void createDriver();
+
     /**
-     * All of the browsers will use this, but a different type of actor (e.g. an API shim) will want to override it.
-     *
-     * @param fullURL - complete address of the page that you want to see.
+     * Choose one of these when you instantiate your actor
      */
-    public void getResource(String fullURL) {
-        getDriver().get(fullURL);
+    public enum ActorType {
     }
+
 }

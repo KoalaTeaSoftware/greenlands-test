@@ -8,7 +8,7 @@ public class Framework {
 
     @Given("I write to the html report {string}")
     public void iWriteToTheHtmlReport(String arg0) {
-        //        System.out.println(arg0);
+        System.out.println(arg0);
         Reports.writeToHtmlReport(arg0);
     }
 
@@ -16,4 +16,5 @@ public class Framework {
     public void iFailATest() {
         Assert.fail("A deliberately failing test");
     }
+
 }

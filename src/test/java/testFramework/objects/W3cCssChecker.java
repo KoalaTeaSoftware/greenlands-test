@@ -8,8 +8,6 @@ import testFramework.Context;
 import java.time.Duration;
 
 public class W3cCssChecker {
-    private final By resultsSectionLocator = By.id("results_container");
-
     /**
      * It is best to aim this directly at the single files that you create.
      * For example, Bootstrap's css invokes error messages (false negatives?) from this tester.
@@ -40,10 +38,5 @@ public class W3cCssChecker {
 
         return resultString.contains("No Error Found");
         // the alternative text is "We found the following errors"
-    }
-
-    public String readResults() {
-        return Context.defaultDriver.findElement(resultsSectionLocator).getAttribute("innerHTML");
-
     }
 }

@@ -25,6 +25,12 @@ public class WebElements {
         return exists;
     }
 
+    /**
+     * Default the ait to the one set in the Context of the test
+     *
+     * @param driver            - which WebDriver you want to use
+     * @param diagnosticElement - This is the element that you are hoping to eventually find
+     */
     public static void waitForPresence(WebDriver driver, By diagnosticElement) {
         waitForPresence(driver, diagnosticElement, Context.pageLoadWait);
     }

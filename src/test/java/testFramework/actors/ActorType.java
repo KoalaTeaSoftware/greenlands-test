@@ -1,6 +1,6 @@
 package testFramework.actors;
 
-@SuppressWarnings("unused")
+@SuppressWarnings("RedundantSuppression")
 public enum ActorType {
     CHROME,
     FIREFOX,

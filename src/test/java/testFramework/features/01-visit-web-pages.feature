@@ -10,8 +10,8 @@ Feature: Visit Web Pages
     And the page scheme is "<scheme>"
     Examples:
       | address                         | title                 | scheme |
-      # This template is pointed at http://koalateasoftware.com, which does not have a redirect to https
-      | /                               |                       |        |
+      # this particular test suite is defaulting to RoseGoldthorp.com, so these all-default expectations have to as follows
+      | /                               | The Greenlands        | http   |
       # The following values are for more helpfully testing the framework
       | koalateasoftware.com/           | Web Site Development  |        |
       | http://koalateasoftware.com     | Web Site Development  | http   |

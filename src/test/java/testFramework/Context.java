@@ -11,21 +11,16 @@ import java.io.IOException;
 
 public class Context {
 
-    // There is one context, and it contains interpretations of the config files, and other shared info
-    // Maybe this should be implemented in another way, because IntelliJ think that this is a utility class
-    @SuppressWarnings("InstantiationOfUtilityClass")
-    private static final Context me = new Context();
-
     public static Scenario scenario;
     public static ActorType defaultActorType;
     public static Actor defaultActor;
     public static WebDriver defaultDriver;
+
     // these fields are static so that the test steps (which are static) can gain access to them
     public static ConfigReader testConfiguration;
     public static ConfigReader sutConfiguration;
     public static Integer implicitWait;
     public static Integer pageLoadWait;
-    public static boolean catchBrowserLogs;
 
     private Context() {
         try {
@@ -67,12 +62,11 @@ public class Context {
             Assert.fail("Unable to understand the waitForPageLoad test configuration value");
         }
 
-        try {
-            catchBrowserLogs = Context.testConfiguration.getProperty("catchBrowserLogs").equalsIgnoreCase("true");
-        } catch (NoSuchFieldException e) {
-            catchBrowserLogs = false;
-        }
-
         defaultActor = testFramework.actors.Factory.make(defaultActorType);
     }
+
+    // There is one context, and it contains interpretations of the config files, and other shared info
+    // Maybe this should be implemented in another way, because IntelliJ think that this is a utility class
+    @SuppressWarnings({"InstantiationOfUtilityClass", "unused"})
+    private static final Context me = new Context();
 }

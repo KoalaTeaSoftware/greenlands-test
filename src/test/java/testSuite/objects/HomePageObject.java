@@ -1,12 +1,11 @@
 package testSuite.objects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 public class HomePageObject extends GreenlandsCommonPage {
-    public HomePageObject(WebDriver driver) {
-        super(driver); //use the default common page's diagnostic element
+    public HomePageObject() {
+        super(); //use the default common page's diagnostic element
     }
 
     // locators

@@ -3,13 +3,12 @@ package testSuite.steps;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.When;
 import org.testng.asserts.SoftAssert;
-import testFramework.Context;
 import testSuite.objects.GreenlandsCommonPage;
 import testSuite.objects.HomePageObject;
 
 public class HomePageSteps {
     // Assume that all of the home page steps will run against a single home page
-    private HomePageObject homePageObject = new HomePageObject(Context.defaultDriver);
+    private final HomePageObject homePageObject = new HomePageObject();
 
     @And("the chapter images are present")
     public void theChapterImagesArePresent() {
@@ -36,7 +35,7 @@ public class HomePageSteps {
     public void iGoToTheChapterCalled(String chapterName) {
         homePageObject.getLinkForChapter(chapterName).click();
         // cause it to wait for the new page
-        GreenlandsCommonPage newPage = new GreenlandsCommonPage(Context.defaultDriver);
+        GreenlandsCommonPage newPage = new GreenlandsCommonPage();
     }
 
 }

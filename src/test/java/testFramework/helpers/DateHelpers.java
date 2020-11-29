@@ -4,7 +4,7 @@ import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class Dates {
+public class DateHelpers {
     /**
      * @param format - see https://docs.oracle.com/javase/8/docs/api/java/time/format/DateTimeFormatter.html
      * @return - now, reformatted so that can be used as a file name
@@ -29,11 +29,12 @@ public class Dates {
                 .toLowerCase();
     }
 
-    /**
-     * @return - now as a date-time stamp to fractions of a second
-     */
-    @SuppressWarnings("SpellCheckingInspection")
-    public static String uniqueFileName() {
-        return formattedNow("yyyy-MM-dd_kkmmss_SSS");
-    }
+    // --Commented out by Inspection START (11/10/2020 20:30):
+    //    /**
+    //     * @return - now as a date-time stamp to fractions of a second
+    //     */
+    //    public static String uniqueFileName() {
+    //        return formattedNow("yyyy-MM-dd_kkmmss_SSS");
+    //    }
+    // --Commented out by Inspection STOP (11/10/2020 20:30)
 }

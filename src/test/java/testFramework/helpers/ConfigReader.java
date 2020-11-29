@@ -6,15 +6,13 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
-/**
- * You will create one of these for each different properties file that you use
- */
 public class ConfigReader {
     private final String propertiesFileName;
     private final Properties properties;
 
     /**
      * Constructor. Reads and remembers the properties in the file
+     * So you will want one of these for each different properties file that you use
      *
      * @param relativePath - relative to the root of the project
      *                     - eg configuration/systemUnderTest.properties
@@ -27,7 +25,6 @@ public class ConfigReader {
             reader = new BufferedReader(new FileReader(relativePath));
             properties = new Properties();
             try {
-                // nest this try / catch because the FNFEx is an extension of IOEx
                 properties.load(reader);
                 reader.close();
             } catch (IOException e) {
@@ -49,8 +46,7 @@ public class ConfigReader {
      */
     public String getProperty(String name) throws NoSuchFieldException {
         String value = properties.getProperty(name);
-        if (value != null)
-            return value;
+        if (value != null) return value;
         else
             throw new NoSuchFieldException("There was no property called :" + name + ": in the properties file :" + propertiesFileName + ":");
     }

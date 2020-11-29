@@ -3,17 +3,17 @@ package testSuite.objects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import testFramework.objects.WebPageObj;
+import testFramework.objects.HtmlPageObject;
 
 import java.util.List;
 
-public class InstagramWidget extends WebPageObj {
+public class InstagramWidget extends HtmlPageObject {
     private final By sectionLocator = By.id("instagram");
     private final By imageLocator = By.className("imgEric");
     private final By followMeButtonLocator = By.xpath("//*[@id='instaButtonRow']//A");
 
     public InstagramWidget(WebDriver defaultDriver) {
-        super(defaultDriver);
+        super();
     }
 
     public List<WebElement> getImageList() {

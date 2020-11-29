@@ -9,12 +9,8 @@ import testFramework.Context;
 import java.time.Duration;
 
 public class W3cHtmlChecker {
-    @SuppressWarnings("FieldCanBeLocal")
-    private final By entryFieldLocator = By.id("uri");
-    @SuppressWarnings("FieldCanBeLocal")
-    private final By checkButtonLocator = By.className("submit");
-    @SuppressWarnings("FieldCanBeLocal")
-    private final By resultsBlockLocator = By.id("results");
+//    Context.defaultDriver.findElement(By.xpath("/html/body/ol/li[@class='error']/ancestor::ol")).getAttribute("outerHTML")
+private final By errorList = By.xpath("//li[@class='error']/ancestor::ol");
 
     /**
      * It is best to aim this directly at the single files that you create.
@@ -23,25 +19,15 @@ public class W3cHtmlChecker {
      * @param urlOfHtmlFile - make it a single file.Scheme is not necessary
      */
     public W3cHtmlChecker(String urlOfHtmlFile, Duration tout) {
-        //        try {
-        //            String sut = "https://html5.validator.nu/?doc=";
-        //            sut += URLEncoder.encode(urlOfHtmlFile, "UTF-8");
-        //            sut += "&parser=html";
+        String sut = "https://html5.validator.nu/?doc=";
+        sut += urlOfHtmlFile;
+        sut += "&parser=html";
 
-        Context.defaultDriver.get("https://validator.w3.org/");
-        // wait until wee see the check button
-        @SuppressWarnings("unused")
-        WebPageObj validator = new WebPageObj(Context.defaultDriver, checkButtonLocator);
+        Context.defaultActor.getResource(sut);
 
-        Context.defaultDriver.findElement(entryFieldLocator).sendKeys(urlOfHtmlFile);
-
-        Context.defaultDriver.findElement(checkButtonLocator).click();
         new WebDriverWait(Context.defaultDriver, tout).
                 until(ExpectedConditions.presenceOfElementLocated(By.className("details"))
                 );
-        //        } catch (UnsupportedEncodingException e) {
-        //            Assert.fail("Unable to encode URL" + e.getMessage());
-        //        }
     }
 
     /**
@@ -50,16 +36,22 @@ public class W3cHtmlChecker {
      * @return - whether it contains text that indicates success, or failure
      */
     public Boolean fileValidates() {
+        String resultString;
+        /*
+        <p class="success">The document validates according to the specified schema(s).</p>
+         */
         try {
-            String msg = Context.defaultDriver.findElement(By.className("success")).getText().toLowerCase();
-            if (msg.contains("no error"))
+            resultString = Context.defaultDriver.findElement(By.className("success")).getText();
+            if (resultString.contains(" document is valid ")) {
                 return true;
+            }
         } catch (NoSuchElementException ignored) {
         }
+        // make the default result to be failure
         return false;
     }
 
-    public String readResults() {
-        return Context.defaultDriver.findElement(resultsBlockLocator).getAttribute("innerHTML");
+    public String getErrorList() {
+        return Context.defaultDriver.findElement(errorList).getAttribute("outerHTML");
     }
 }

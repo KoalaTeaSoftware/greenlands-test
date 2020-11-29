@@ -5,30 +5,26 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
-import testFramework.helpers.Urls;
+import testFramework.helpers.resourceLocator;
 import testFramework.objects.W3cLinkChecker;
 
-import java.net.MalformedURLException;
 import java.time.Duration;
 
-import static testFramework.helpers.Dates.humanReadableDuration;
+import static testFramework.helpers.DateHelpers.humanReadableDuration;
 
 public class PageLinkCheck {
-    // the link checker can be quite slow, especially for the  bestiary list
-    final Duration tout = Duration.ofSeconds(480);
+    final Duration tout = Duration.ofSeconds(120); // the link checker can be quite slow
 
     private W3cLinkChecker w3cLinkChecker;
     private String url;
 
     @Given("the w3c link checker reviews the file {string}")
     public void theW3CLinkCheckerReviewsTheFile(String urlOfFile) {
+        url = resourceLocator.interpretURL(urlOfFile);
         try {
-            url = Urls.interpretURL(urlOfFile);
             w3cLinkChecker = new W3cLinkChecker(url, tout);
         } catch (TimeoutException e) {
-            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout));
-        } catch (MalformedURLException | NoSuchFieldException e) {
-            Assert.fail("Failed to understand URL." + e.getMessage());
+            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout) + " seconds");
         }
     }
 

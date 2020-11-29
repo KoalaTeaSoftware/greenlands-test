@@ -1,14 +1,12 @@
 package testFramework.actors;
 
 
-import org.junit.Assert;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxDriverLogLevel;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import testFramework.Context;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 public class FirefoxActor extends Actor {
@@ -25,28 +23,29 @@ public class FirefoxActor extends Actor {
 
     @Override
     protected void startService() {
-        if (service == null) {
-            System.out.println("[info] Creating a Driver Service for Firefox");
-            try {
-                //                String logLoc = System.getProperty("user.dir");
-                //                logLoc += File.separator + ContextOfTest.testConfiguration.getProperty("driverLogLocation");
-                //                logLoc += File.separator + "Firefox-" + DateHelpers.uniqueFileName() + ".txt";
-
-                String driverPath = Context.testConfiguration.getProperty("firefoxDriverPath");
-
-                FirefoxOptions options = new FirefoxOptions();
-                options.setLogLevel(FirefoxDriverLogLevel.DEBUG);
-
-                service = new GeckoDriverService.Builder()
-                        .usingDriverExecutable(new File(driverPath))
-                        .usingAnyFreePort()
-                        //                        .withLogFile(new File(logLoc))
-                        .build();
-            } catch (Exception e) {
-                e.printStackTrace();
-                Assert.fail();
-            }
-        }
+        WebDriverManager.firefoxdriver().setup();
+        //        if (service == null) {
+        //            System.out.println("[info] Creating a Driver Service for Firefox");
+        //            try {
+        ////                String logLoc = System.getProperty("user.dir");
+        ////                logLoc += File.separator + ContextOfTest.testConfiguration.getProperty("driverLogLocation");
+        ////                logLoc += File.separator + "Firefox-" + DateHelpers.uniqueFileName() + ".txt";
+        //
+        //                String driverPath = Context.testConfiguration.getProperty("firefoxDriverPath");
+        //
+        //                FirefoxOptions options = new FirefoxOptions();
+        //                options.setLogLevel(FirefoxDriverLogLevel.DEBUG);
+        //
+        //                service = new GeckoDriverService.Builder()
+        //                        .usingDriverExecutable(new File(driverPath))
+        //                        .usingAnyFreePort()
+        //                        //                        .withLogFile(new File(logLoc))
+        //                        .build();
+        //            } catch (Exception e) {
+        //                e.printStackTrace();
+        //                Assert.fail();
+        //            }
+        //        }
     }
 
     @Override
@@ -73,7 +72,8 @@ public class FirefoxActor extends Actor {
         FirefoxOptions options = new FirefoxOptions();
         options.setHeadless(headless);
 
-        driver = new FirefoxDriver(service, options);
+        driver = new FirefoxDriver(options);
+        //        driver = new FirefoxDriver(service, options);
 
         driver.manage().timeouts().implicitlyWait(Context.implicitWait, TimeUnit.SECONDS);
 

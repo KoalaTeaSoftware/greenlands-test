@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>koalata-software.com</groupId>
-    <artifactId>UITest</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>com.koalateasoftware</groupId>
+    <artifactId>Swords-and-clapboards</artifactId>
+    <version>1.0</version>
 
     <!-- see https://github.com/cucumber/cucumber-java-skeleton/blob/master/pom.xml -->
     <properties>
@@ -34,7 +34,6 @@
             <version>${cucumber.version}</version>
             <scope>test</scope>
         </dependency>
-
         <!--without _one_ of the following 2, it can't find things like org.openqa, so might as well have both -->
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver -->
         <dependency>
@@ -48,12 +47,18 @@
             <artifactId>selenium-chrome-driver</artifactId>
             <version>3.141.59</version>
         </dependency>
-
         <!-- selenium-support is needed for the page factory -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-support</artifactId>
             <version>4.0.0-alpha-4</version>
+            <scope>test</scope>
+        </dependency>
+        <!-- see https://github.com/bonigarcia/webdrivermanager - this could simplify web driver management -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>4.2.2</version>
             <scope>test</scope>
         </dependency>
 
@@ -79,6 +84,8 @@
             <artifactId>json</artifactId>
             <version>20190722</version>
         </dependency>
+
+        <!-- for the soft asserts -->
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
@@ -101,6 +108,20 @@
                 </configuration>
             </plugin>
 
+            <plugin>
+                <!-- to allow Maven to know how to run the cucumber tests -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.0.0-M5</version>
+                <configuration>
+                    <includes>
+                        <!-- Run all testSuite test runners -->
+                        <include>**/testSuite/runners/*.java</include>
+                    </includes>
+                    <testFailureIgnore>false</testFailureIgnore>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
 </project>

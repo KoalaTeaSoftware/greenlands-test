@@ -9,8 +9,8 @@ import testSuite.objects.GreenlandsCommonPage;
 import testSuite.objects.SecondaryNavWidget;
 
 public class SecondaryNav {
-    GreenlandsCommonPage myPage = new GreenlandsCommonPage(Context.defaultDriver); // wait the the age to be drawn
-    SecondaryNavWidget me = new SecondaryNavWidget(Context.defaultDriver);
+    final SecondaryNavWidget me = new SecondaryNavWidget(Context.defaultDriver);
+    GreenlandsCommonPage myPage = new GreenlandsCommonPage(); // wait the the age to be drawn
 
     @Then("the secondary nav links are present")
     public void theSecondaryNavLinksArePresent() {
@@ -26,7 +26,7 @@ public class SecondaryNav {
             // although the link is likely to be off the bottom of the page, bth FFx and Chrome will let you click on it
             me.followLink(linkName);
             // This may result in a new page being show, this may take a while
-            myPage = new GreenlandsCommonPage(Context.defaultDriver);
+            myPage = new GreenlandsCommonPage();
         } catch (NoSuchElementException e) {
             Assert.fail("Unable to find secondary nave item named :" + linkName + ": " + e.getMessage());
         }

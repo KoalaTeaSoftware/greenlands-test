@@ -15,40 +15,21 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Things that all web pages contain / can do
- */
-public class WebPageObj {
-    public final By firstHeaderLocator = By.tagName("H1");
+public class HtmlPageObject {
+    public WebDriver myDriver;
 
-    public final WebDriver myDriver;
-
-    public WebPageObj(WebDriver driver, By diagnosticLocator) {
-        this.myDriver = driver;
-        awaitReadiness(diagnosticLocator);
-    }
-
-    public WebPageObj(WebDriver driver) {
-        this.myDriver = driver;
-        awaitReadiness(By.tagName("BODY"));
-    }
-
-    private void awaitReadiness(By diagnosticElement) {
-        // Selenium is supposed to do this, but let's do it too
-        waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
-
-        new WebDriverWait(
-                Context.defaultDriver,
-                Duration.ofSeconds(Context.pageLoadWait)
-        ).until(
+    public HtmlPageObject() {
+        this.myDriver = Context.defaultDriver;
+        new WebDriverWait(Context.defaultDriver, Duration.ofSeconds(Context.pageLoadWait))
                 // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
-                ExpectedConditions.presenceOfElementLocated(diagnosticElement)
-        );
-
+                .until(ExpectedConditions.presenceOfElementLocated(By.tagName("BODY")));
+        // OK, Selenium is supposed to do this, but let's make it specific
+        waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
     }
 
-    public String readPageTitle() { return myDriver.getTitle(); }
-
+    public String readPageTitle() {
+        return myDriver.getTitle();
+    }
 
     /**
      * @param tabIndex - staring at zero
@@ -68,24 +49,31 @@ public class WebPageObj {
         return newTitle;
     }
 
-    public String readFirstHeader() { return myDriver.findElement(firstHeaderLocator).getText(); }
-
-    public void waitForTitleToBe(String expectedTitle) {
-        WebDriverWait webDriverWait = new WebDriverWait(myDriver, Duration.ofSeconds(Context.pageLoadWait));
-        webDriverWait.until(ExpectedConditions.titleIs(expectedTitle));
+    public String readFirstHeader() {
+        return myDriver.findElement(By.tagName("H1")).getText();
     }
 
-    public void waitForFirstHeaderToBe(String expectedTitle) {
-        WebDriverWait webDriverWait = new WebDriverWait(myDriver, Duration.ofSeconds(Context.pageLoadWait));
-        webDriverWait.until(ExpectedConditions.textToBe(firstHeaderLocator, expectedTitle));
+    public URL readCurrentLocation() {
+        URL url = null;
+        try {
+            url = new URL(myDriver.getCurrentUrl());
+        } catch (MalformedURLException ignore) {
+            // surely, this never throws a malformed URL?
+        }
+        return url;
     }
 
-    public URL readLocation() throws MalformedURLException {
-        return new URL(myDriver.getCurrentUrl());
-    }
 
     /**
-     * This can be useful if you know that some JavaScript is going to do something
+     * When looking at web pages, the implicit wait may not be sufficient,
+     * so this explicitly asks the browser if it thinks it has got everything
+     * <p>
+     * Even this may be less help than you like, so it may be good to override it in your own page object definitions with
+     * an explicit wait for the visibility of something that you know is slow for example
+     * <p>
+     * WebDriverWait wait = new WebDriverWait(driver, 10);
+     * WebElement elem = driver.findElement(By.id("diagnosticElement"));
+     * wait.until(ExpectedConditions.visibilityOf(elem));
      *
      * @param maxWaitSeconds -
      */
@@ -134,9 +122,14 @@ public class WebPageObj {
                         "typeof arguments[0].naturalWidth != \"undefined\" && " +
                         "arguments[0].naturalWidth > 0", imgTag);
 
+        boolean loaded = false;
         if (result instanceof Boolean) {
-            return (Boolean) result;
+            loaded = (Boolean) result;
         }
-        return false;
+        return loaded;
+    }
+
+    public List<WebElement> listImgTags() {
+        return myDriver.findElements(By.tagName("IMG"));
     }
 }
