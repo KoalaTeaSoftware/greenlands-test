@@ -2,7 +2,7 @@
 Feature: Chapter: Art
   This page contains a few widget which have their own feature specification
 
-  Scenario: HTML Compliance with W3C standards
+  Scenario: HTML syntax validated
     Given the w3C HTML tester reviews the file "art"
     Then the w3c HTML tester reports compliance
 

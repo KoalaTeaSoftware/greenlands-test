@@ -30,7 +30,7 @@ public class SecondaryNavWidget {
         myDriver = driver;
         PageFactory.initElements(myDriver, this);
 
-        WebDriverWait webDriverWait = new WebDriverWait(myDriver, Duration.ofSeconds(30));
+        WebDriverWait webDriverWait = new WebDriverWait(myDriver, Duration.ofSeconds(40));
         webDriverWait.until(ExpectedConditions.elementToBeClickable(policyLink));
     }
 

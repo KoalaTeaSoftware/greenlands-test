@@ -13,7 +13,7 @@ import java.time.Duration;
 import static testFramework.helpers.DateHelpers.humanReadableDuration;
 
 public class PageLinkCheck {
-    final Duration tout = Duration.ofSeconds(120); // the link checker can be quite slow
+    final Duration tout = Duration.ofSeconds(60 * 3); // the link checker can be quite slow
 
     private W3cLinkChecker w3cLinkChecker;
     private String url;
@@ -24,7 +24,7 @@ public class PageLinkCheck {
         try {
             w3cLinkChecker = new W3cLinkChecker(url, tout);
         } catch (TimeoutException e) {
-            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout) + " seconds");
+            Assert.fail("Failed to find results from:" + url + ": in " + humanReadableDuration(tout));
         }
     }
 

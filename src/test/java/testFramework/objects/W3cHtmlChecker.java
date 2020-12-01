@@ -9,8 +9,9 @@ import testFramework.Context;
 import java.time.Duration;
 
 public class W3cHtmlChecker {
-//    Context.defaultDriver.findElement(By.xpath("/html/body/ol/li[@class='error']/ancestor::ol")).getAttribute("outerHTML")
-private final By errorList = By.xpath("//li[@class='error']/ancestor::ol");
+    //    Context.defaultDriver.findElement(By.xpath("/html/body/ol/li[@class='error']/ancestor::ol")).getAttribute("outerHTML")
+    private final By errorList = By.xpath("//li[@class='error']/ancestor::ol");
+    private final By warningList = By.xpath("//li[contains(@class,'warning')]/ancestor::ol");
 
     /**
      * It is best to aim this directly at the single files that you create.
@@ -19,9 +20,7 @@ private final By errorList = By.xpath("//li[@class='error']/ancestor::ol");
      * @param urlOfHtmlFile - make it a single file.Scheme is not necessary
      */
     public W3cHtmlChecker(String urlOfHtmlFile, Duration tout) {
-        String sut = "https://html5.validator.nu/?doc=";
-        sut += urlOfHtmlFile;
-        sut += "&parser=html";
+        String sut = "https://validator.w3.org/nu/?doc=" + urlOfHtmlFile;
 
         Context.defaultActor.getResource(sut);
 
@@ -31,27 +30,35 @@ private final By errorList = By.xpath("//li[@class='error']/ancestor::ol");
     }
 
     /**
+     * To be called once the checker has reviewed the subject file
+     * <p>
      * On both the success and failure pages, the first h3 tells you the result
      *
      * @return - whether it contains text that indicates success, or failure
      */
     public Boolean fileValidates() {
-        String resultString;
-        /*
-        <p class="success">The document validates according to the specified schema(s).</p>
-         */
         try {
-            resultString = Context.defaultDriver.findElement(By.className("success")).getText();
-            if (resultString.contains(" document is valid ")) {
-                return true;
-            }
-        } catch (NoSuchElementException ignored) {
+            // look for a success paragraph that contains some text
+            Context.defaultDriver.findElement(By.className("success")).getText();
+            return true;
+        } catch (NoSuchElementException e) {
+            // if there is no such paragraph then consider it as a failure
+            return false;
         }
-        // make the default result to be failure
-        return false;
     }
 
+    /**
+     * @return - any warnings, and any errors. If there are none to be found, then am empty list is given. This is
+     * probably a fault somewhere
+     */
     public String getErrorList() {
-        return Context.defaultDriver.findElement(errorList).getAttribute("outerHTML");
+        String result = "";
+        try {
+            result += Context.defaultDriver.findElement(warningList).getAttribute("outerHTML");
+        } catch (NoSuchElementException ignore) { }
+        try {
+            result += Context.defaultDriver.findElement(errorList).getAttribute("outerHTML");
+        } catch (NoSuchElementException ignore) { }
+        return result;
     }
 }

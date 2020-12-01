@@ -10,7 +10,10 @@ public class HomePageObject extends GreenlandsCommonPage {
 
     // locators
     private By chapterLink(String name) {
-        return By.xpath("//*[@id='page-content']//a//h2[normalize-space(text())='" + name + "']");
+        /* When the home page changed to using a map, it became impossible to match words and active areas
+        Therefore, we are assuming that the chapter name that we are given correspond to the ids of elements
+         */
+        return By.xpath("//*[@id='page-content']//*[@id='actions']//*[@id='" + name.toLowerCase() + "']");
     }
 
     // actions
@@ -23,6 +26,7 @@ public class HomePageObject extends GreenlandsCommonPage {
      * @return - the first element in the main nav bar that IS the text given in the param
      */
     public WebElement getLinkForChapter(String displayedText) {
+
         // byLinkText consistently fails to find the these links, but the following is fast enough,and reliable
         return myDriver.findElement(chapterLink(displayedText));
     }

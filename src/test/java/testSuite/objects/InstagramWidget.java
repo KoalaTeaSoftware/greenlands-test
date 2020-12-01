@@ -13,7 +13,7 @@ public class InstagramWidget extends HtmlPageObject {
     private final By followMeButtonLocator = By.xpath("//*[@id='instaButtonRow']//A");
 
     public InstagramWidget(WebDriver defaultDriver) {
-        super();
+        super(By.className("imgEric"));
     }
 
     public List<WebElement> getImageList() {

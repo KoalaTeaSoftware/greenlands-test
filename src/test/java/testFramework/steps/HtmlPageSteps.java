@@ -83,9 +83,18 @@ public class HtmlPageSteps {
         final int numImgs = imgList.size();
 
         for (int i = 0; i < numImgs; i++) {
-            sa.assertTrue(
-                    getMyPage().browserShowsImage(imgList.get(i)),
-                    "Image number " + i + "does not appear to be well formed");
+            // if the class indicates that it is a special affiliate link, then ignore it
+            if (!imgList.get(i).getAttribute("class").contains("amazonAffiliateTrackingLink"))
+                sa.assertTrue(
+                        getMyPage().
+                                browserShowsImage(
+                                        imgList.get(i)),
+                        String.format(
+                                "Image number %d, with src of :%s: does not appear to be well formed",
+                                i,
+                                imgList.get(i).getAttribute("src")
+                        )
+                );
         }
         sa.assertAll();
     }

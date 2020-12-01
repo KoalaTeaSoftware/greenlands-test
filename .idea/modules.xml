@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/UITest.iml" filepath="$PROJECT_DIR$/UITest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Swords-and-clapboards.iml" filepath="$PROJECT_DIR$/Swords-and-clapboards.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/selenium-type-framework.iml" filepath="$PROJECT_DIR$/.idea/selenium-type-framework.iml" />
     </modules>
   </component>

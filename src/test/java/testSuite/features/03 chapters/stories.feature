@@ -11,7 +11,7 @@ Feature: Chapter: Stories
   Scenario: See that the images are correctly shown
   This is a minor risk as the image files are not even served up from a CDN provided through WordPress
     Given I navigate to the page "stories"
-    Then all images are well drawn
+    Then all images are well formed
 
   Scenario: HTML Compliance with W3C standards
     Given the w3C HTML tester reviews the file "stories"

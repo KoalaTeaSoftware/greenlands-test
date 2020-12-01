@@ -9,11 +9,11 @@ Feature: Chapter: Home
     Given I navigate to the page ""
     Then the secondary nav links are present
 
-  Scenario: Observe the chapter images
-  This is a minor risk as the image files are served up from a CDN provided through WordPress
-  However, the images are pretty central to the worth of the page
-    Given I navigate to the page ""
-    Then the chapter images are present
+#  Scenario: Observe the chapter images
+#  This is a minor risk as the image files are served up from a CDN provided through WordPress
+#  However, the images are pretty central to the worth of the page
+#    Given I navigate to the page ""
+#    Then the chapter images are present
 
   Scenario Outline: Follow chapter links and see that we get the right chapter
   The home page is, basically, a graphical chapter navigator
@@ -29,7 +29,7 @@ Feature: Chapter: Home
       |     | Art      | The Greenlands \| art      |
       |     | Music    | The Greenlands \| music    |
       |     | Stories  | The Greenlands \| stories  |
-      |     | Medicine | The Greenlands \| medicine |
+      |     | Potions  | The Greenlands \| potions  |
 
   Scenario: HTML Compliance with W3C standards
     Given the w3C HTML tester reviews the file ""

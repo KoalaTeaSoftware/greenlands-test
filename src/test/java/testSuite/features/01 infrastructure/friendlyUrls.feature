@@ -23,4 +23,4 @@ Feature: Infrastructure: Friendly URLs
       | art      | The Greenlands \| art      |
       | music    | The Greenlands \| music    |
       | stories  | The Greenlands \| stories  |
-      | medicine | The Greenlands \| medicine |
+      | medicine | The Greenlands \| potions  |

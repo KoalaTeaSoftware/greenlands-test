@@ -16,16 +16,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HtmlPageObject {
-    public WebDriver myDriver;
+    public final WebDriver myDriver;
 
     public HtmlPageObject() {
         this.myDriver = Context.defaultDriver;
-        new WebDriverWait(Context.defaultDriver, Duration.ofSeconds(Context.pageLoadWait))
-                // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
-                .until(ExpectedConditions.presenceOfElementLocated(By.tagName("BODY")));
         // OK, Selenium is supposed to do this, but let's make it specific
         waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
+        waitTillDrawn(By.tagName("BODY"));
     }
+
+    public HtmlPageObject(By diagnostic) {
+        this.myDriver = Context.defaultDriver;
+        waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
+        waitTillDrawn(diagnostic);
+    }
+
+    private void waitTillDrawn(By diagnostic) {
+        new WebDriverWait(
+                Context.defaultDriver,
+                Duration.ofSeconds(Context.pageLoadWait))
+                // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
+                .until(
+                        ExpectedConditions.presenceOfElementLocated(diagnostic)
+                );
+    }
+
 
     public String readPageTitle() {
         return myDriver.getTitle();
@@ -122,7 +137,7 @@ public class HtmlPageObject {
                         "typeof arguments[0].naturalWidth != \"undefined\" && " +
                         "arguments[0].naturalWidth > 0", imgTag);
 
-        boolean loaded = false;
+        boolean loaded = false; // unless we can convert it to true
         if (result instanceof Boolean) {
             loaded = (Boolean) result;
         }

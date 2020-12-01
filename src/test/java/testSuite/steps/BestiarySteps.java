@@ -119,8 +119,8 @@ public class BestiarySteps {
         sa.assertAll();
     }
 
-    @When("I follow a details link for item entitles {string}")
-    public void iFollowADetailsLinkForItemEntitles(String linkText) {
+    @When("I follow a details link for item entitled {string}")
+    public void iFollowADetailsLinkForItemEntitled(String linkText) {
         BestiaryListPage myPage = new BestiaryListPage(Context.defaultDriver);
         myPage.followLinkWithText(linkText);
         // force the wait for the new page to happen
