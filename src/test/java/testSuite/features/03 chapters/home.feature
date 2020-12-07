@@ -3,33 +3,9 @@ Feature: Chapter: Home
   This is the landing page for the site. It provide chapter navigation.
   There are various common elements, but these are their own feature
 
-  Scenario: Observe the secondary nav (at the base of the page)
-  If this is missing, then it is likely that there has been a problem drawing this page
-  This may be verified elsewhere, but put it here so that this feature can be independent of other feature files
+  Scenario: Observe the page
     Given I navigate to the page ""
-    Then the secondary nav links are present
-
-#  Scenario: Observe the chapter images
-#  This is a minor risk as the image files are served up from a CDN provided through WordPress
-#  However, the images are pretty central to the worth of the page
-#    Given I navigate to the page ""
-#    Then the chapter images are present
-
-  Scenario Outline: Follow chapter links and see that we get the right chapter
-  The home page is, basically, a graphical chapter navigator
-  This testing differs from the 'broken links' testing in that it demonstrates that the links in the nav bar actually take you
-  to where you want to be taken.
-    Given I navigate to the page "<url>"
-    When I go to the chapter called "<linkText>"
-    Then the page title is "<expectedPageTitle>"
-    Examples:
-      | url | linkText | expectedPageTitle          |
-      |     | Bestiary | The Greenlands \| bestiary |
-      |     | Roots    | The Greenlands \| roots    |
-      |     | Art      | The Greenlands \| art      |
-      |     | Music    | The Greenlands \| music    |
-      |     | Stories  | The Greenlands \| stories  |
-      |     | Potions  | The Greenlands \| potions  |
+    Then the page title is "The Greenlands"
 
   Scenario: HTML Compliance with W3C standards
     Given the w3C HTML tester reviews the file ""
@@ -39,3 +15,18 @@ Feature: Chapter: Home
     Given the w3c link checker reviews the file ""
     Then the w3c link checker reports compliance
 
+  Scenario Outline: Follow chapter links and see that we get the right chapter
+  The home page is, basically, a graphical chapter navigator
+  This testing differs from the 'broken links' testing in that it demonstrates that the links in the nav bar actually take you
+  to where you want to be taken.
+    Given I navigate to the page ""
+    When I go to the chapter called "<linkText>"
+    Then the page title is "<expectedPageTitle>"
+    Examples:
+      | linkText | expectedPageTitle |
+      | Bestiary | Bestiary          |
+      | Roots    | Roots             |
+      | Music    | Music             |
+      | Stories  | Stories           |
+      | Potions  | Potions           |
+      | Lore     | Lore              |

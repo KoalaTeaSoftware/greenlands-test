@@ -1,19 +1,16 @@
 package testSuite.objects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import testFramework.objects.HtmlPageObject;
 
 import java.time.Duration;
 
-public class SecondaryNavWidget {
-    // once the object has been created, it will always use the same driver
-    // I can't imagine any scenario when it will not be the default, but make it plain by putting it here
-    private final WebDriver myDriver;
+public class SecondaryNavWidget extends HtmlPageObject {
     // Locators
     @FindBy(id = "tailNav")
     public WebElement tailNavBlock;
@@ -26,8 +23,8 @@ public class SecondaryNavWidget {
 
     // Actions
 
-    public SecondaryNavWidget(WebDriver driver) {
-        myDriver = driver;
+    public SecondaryNavWidget() {
+        super(new By.ById("tailNav"));
         PageFactory.initElements(myDriver, this);
 
         WebDriverWait webDriverWait = new WebDriverWait(myDriver, Duration.ofSeconds(40));
@@ -36,7 +33,7 @@ public class SecondaryNavWidget {
 
     // Housekeeping
 
-    private By navLink(String name) {
+    private By getNavlinkWithName(String name) {
         return By.xpath("//*[@id='tailNav']//*[@class='nav-item']//A[normalize-space(text())='" + name + "']");
     }
 
@@ -46,6 +43,6 @@ public class SecondaryNavWidget {
      * @param name - normalised string that you expect to see for this link. Case sensitive
      */
     public void followLink(String name) {
-        myDriver.findElement(navLink(name)).click();
+        myDriver.findElement(getNavlinkWithName(name)).click();
     }
 }

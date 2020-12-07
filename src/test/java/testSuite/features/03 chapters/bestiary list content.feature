@@ -4,7 +4,7 @@ Feature: Chapter: Bestiary: List Page: Contents
 
   Background: Get us to that chapter
     Given I navigate to the page "bestiary"
-    And the page title is "The Greenlands | bestiary"
+    And the page title is "Bestiary"
 
   Scenario: Count beast list items
     Then there are more than 7 beasts listed
@@ -31,9 +31,9 @@ Feature: Chapter: Bestiary: List Page: Contents
     Then the page title is "<expectedTitle>"
     And the first heading is "<linkText>"
     Examples:
-      | linkText   | expectedTitle                            |
-      | The Goblin | The Greenlands \| bestiary \| the-goblin |
-      | The Elf    | The Greenlands \| bestiary \| the-elf    |
+      | linkText   | expectedTitle |
+      | The Goblin | The Goblin    |
+      | The Elf    | The Elf       |
 
   @wip @cms-data-entry
   Scenario: Follow all links

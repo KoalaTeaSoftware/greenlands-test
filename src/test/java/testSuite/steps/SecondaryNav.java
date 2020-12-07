@@ -4,16 +4,15 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
-import testFramework.Context;
 import testSuite.objects.GreenlandsCommonPage;
 import testSuite.objects.SecondaryNavWidget;
 
 public class SecondaryNav {
     // Firstly, wait the the page to be drawn
-    final GreenlandsCommonPage myPage = new GreenlandsCommonPage();
+    //    final GreenlandsCommonPage myPage = new GreenlandsCommonPage();
 
     // Now, make a purpose-built item for running the tests on
-    final SecondaryNavWidget me = new SecondaryNavWidget(Context.defaultDriver);
+    final SecondaryNavWidget me = new SecondaryNavWidget();
 
     @Then("the secondary nav links are present")
     public void theSecondaryNavLinksArePresent() {

@@ -4,7 +4,7 @@ Feature: Chapter: Roots
 
   Scenario: See that the page is complete
     Given I navigate to the page "roots"
-    Then the page title is "The Greenlands | roots"
+    Then the page title is "Roots"
     And the secondary nav links are present
 
   Scenario: See that the images are correctly shown

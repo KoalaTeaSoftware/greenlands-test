@@ -12,13 +12,13 @@ Feature: Chapter: Bestiary: Detail Page
     Then the w3c HTML tester reports compliance
 
   Scenario: Check links on a page
-  there are few links on the page (unless entered into the text using the CMS), only the secondary nav are to be expected
+  There are few links on the page (unless entered into the text using the CMS), only the secondary nav are to be expected
     Given the w3c link checker reviews the file "bestiary/the-mermaid"
     Then the w3c link checker reports compliance
 
   Scenario: review the title
     Given I navigate to the page "bestiary/the-mermaid"
-    Then the page title is "The Greenlands | the-mermaid"
+    Then the page title is "The Mermaid"
 
   Scenario: Review images
     Given I navigate to the page "bestiary/the-troll"

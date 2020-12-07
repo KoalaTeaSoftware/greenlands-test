@@ -3,7 +3,7 @@ Feature: Chapter: Music
 
   Scenario: See that the page is complete
     Given I navigate to the page "music"
-    Then the page title is "The Greenlands | music"
+    Then the page title is "Music"
     And the secondary nav links are present
 
   Scenario: See that the images are correctly shown

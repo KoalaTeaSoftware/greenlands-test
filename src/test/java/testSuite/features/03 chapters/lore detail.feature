@@ -6,6 +6,14 @@ Feature: Chapter: Lore: Detail Page
   determining that the page build was successful
   This is separated from the list contents just because the others make use of the Background Gherkin construction and this does not
 
+  Scenario: Review the title
+    Given I navigate to the page "lore/a-potted-history-of-the-greenlands"
+    Then the page title is "A Potted History Of The Greenlands"
+
+  Scenario: Review images
+    Given I navigate to the page "lore/a-potted-history-of-the-greenlands"
+    Then all images are well formed
+
   Scenario: HTML syntax veracity
   If the request of data from the CMS fails, it is likely that the HTML will be invalid
     Given the w3C HTML tester reviews the file "lore/a-potted-history-of-the-greenlands"
@@ -17,10 +25,3 @@ Feature: Chapter: Lore: Detail Page
     Given the w3c link checker reviews the file "lore/a-potted-history-of-the-greenlands"
     Then the w3c link checker reports compliance
 
-  Scenario: Review the title
-    Given I navigate to the page "lore/a-potted-history-of-the-greenlands"
-    Then the page title is "The Greenlands | lore | a-potted-history-of-the-greenlands"
-
-  Scenario: Review images
-    Given I navigate to the page "lore/a-potted-history-of-the-greenlands"
-    Then all images are well formed

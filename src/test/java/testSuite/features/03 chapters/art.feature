@@ -1,4 +1,4 @@
-@functional
+@functional @wip
 Feature: Chapter: Art
   This page contains a few widget which have their own feature specification
 

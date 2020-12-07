@@ -3,7 +3,7 @@ Feature: Chapter: Medicine
 
   Scenario: See that the page is complete
     Given I navigate to the page "potions"
-    Then the page title is "The Greenlands | potions"
+    Then the page title is "Potions"
     And the secondary nav links are present
 
   Scenario: See that the images are correctly shown

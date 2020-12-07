@@ -4,7 +4,7 @@ Feature: Chapter: Lore: List Page: Contents
 
   Background: Get us to that chapter
     Given I navigate to the page "lore"
-    And the page title is "The Greenlands | lore"
+    And the page title is "Lore"
 
   Scenario: Review the images in the list
     Then all images are well formed

@@ -11,6 +11,8 @@ import testFramework.objects.HtmlPageObject;
  * Also, wait for the last thing to be part of the DOM
  */
 public class GreenlandsCommonPage extends HtmlPageObject {
+    @SuppressWarnings("FieldCanBeLocal")
+    private final By defaultDiagnosticLocator = By.id("policyLink");
 
     /**
      * in normal usage, we will be using the default driver and the default diagnostic locator, so make life easy for
@@ -18,7 +20,6 @@ public class GreenlandsCommonPage extends HtmlPageObject {
      */
     public GreenlandsCommonPage() {
         super();
-        By defaultDiagnosticLocator = By.id("newsletterSignUp");
         WebElements.waitForPresence(Context.defaultDriver, defaultDiagnosticLocator);
     }
 

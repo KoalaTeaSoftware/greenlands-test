@@ -9,7 +9,7 @@ public class HomePageObject extends GreenlandsCommonPage {
     }
 
     // locators
-    private By chapterLink(String name) {
+    private By getLinkGivenName(String name) {
         /* When the home page changed to using a map, it became impossible to match words and active areas
         Therefore, we are assuming that the chapter name that we are given correspond to the ids of elements
          */
@@ -28,7 +28,7 @@ public class HomePageObject extends GreenlandsCommonPage {
     public WebElement getLinkForChapter(String displayedText) {
 
         // byLinkText consistently fails to find the these links, but the following is fast enough,and reliable
-        return myDriver.findElement(chapterLink(displayedText));
+        return myDriver.findElement(getLinkGivenName(displayedText));
     }
 
     /**
