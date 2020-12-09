@@ -23,18 +23,19 @@ Feature: Widget: Secondary Nav
       | startPoint | startingTitle | buttonText | expectedTitle |
       |            |               | Contact    | Contact       |
       |            |               | Policies   | Policies      |
-      |            |               | Membership |               |
+#      |            |               | Membership |               |
       | bestiary   | Bestiary      | Contact    | Contact       |
       | bestiary   | Bestiary      | Policies   | Policies      |
-      | bestiary   | Bestiary      | Membership | Bestiary      |
+#      | bestiary   | Bestiary      | Membership | Bestiary      |
 
-  Scenario Outline: Check membership link
-  This link differs from the others in that it invokes a popup, and does not changing the page
-    Given I navigate to the page "<startPoint>"
-    And the membership widget is not visible
-    When I follow the secondary nav with text "Membership"
-    Then the membership widget is visible
-    Examples:
-      | startPoint |
-      |            |
-      | bestiary   |
+#  2020/12 membership is not required and does not work correctly
+#  Scenario Outline: Check membership link
+#  This link differs from the others in that it invokes a popup, and does not changing the page
+#    Given I navigate to the page "<startPoint>"
+#    And the membership widget is not visible
+#    When I follow the secondary nav with text "Membership"
+#    Then the membership widget is visible
+#    Examples:
+#      | startPoint |
+#      |            |
+#      | bestiary   |

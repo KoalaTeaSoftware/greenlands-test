@@ -16,9 +16,13 @@ Feature: Chapter: Stories
     Given the w3C HTML tester reviews the file "stories"
     Then the w3c HTML tester reports compliance
 
+
   Scenario: Check links on a page
   There are links to various podcast platforms
   I lieu of actually testing that they take the user to the right place, check that they go somewhere
     Given the w3c link checker reviews the file "stories"
     Then the w3c link checker reports compliance
+      | exceptions        |
+      | www.instagram.com |
+
 

@@ -1,6 +1,7 @@
 package testFramework.steps;
 
 
+import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
@@ -9,6 +10,7 @@ import testFramework.helpers.resourceLocator;
 import testFramework.objects.W3cLinkChecker;
 
 import java.time.Duration;
+import java.util.List;
 
 import static testFramework.helpers.DateHelpers.humanReadableDuration;
 
@@ -29,7 +31,12 @@ public class PageLinkCheck {
     }
 
     @Then("the w3c link checker reports compliance")
-    public void theW3CLinkCheckerReportsCompliance() {
-        Assert.assertTrue("Links on page :" + url + ": appear broken", w3cLinkChecker.fileValidates());
+    public void theW3CLinkCheckerReportsCompliance(DataTable dataTable) {
+        // this is a list of strings (preferably domain names) that should be ignored
+        List<String> possibleExceptions = dataTable.asList(String.class);
+
+        Assert.assertTrue("Links on page :" + url + ": appear broken",
+                w3cLinkChecker.fileValidates(possibleExceptions.subList(1, possibleExceptions.size()))
+        );
     }
 }

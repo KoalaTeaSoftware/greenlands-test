@@ -5,7 +5,7 @@ Feature: Widget: Instagram Feed
   Currently the results can be seen on the Arts Page
 
   Background:
-    Given I navigate to the page "art"
+    Given I navigate to the page "stories"
 
   Scenario: Review Instagram images
   The nice people at Facebook make getting the images any other way that through Instagram into a drama

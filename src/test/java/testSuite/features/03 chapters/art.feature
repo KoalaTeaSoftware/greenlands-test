@@ -13,4 +13,6 @@ Feature: Chapter: Art
 #  Scenario: Check links on a page
 #    Given the w3c link checker reviews the file "art"
 #    Then the w3c link checker reports compliance
+      | exceptions        |
+      | www.instagram.com |
 

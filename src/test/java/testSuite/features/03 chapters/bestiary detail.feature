@@ -15,6 +15,8 @@ Feature: Chapter: Bestiary: Detail Page
   There are few links on the page (unless entered into the text using the CMS), only the secondary nav are to be expected
     Given the w3c link checker reviews the file "bestiary/the-mermaid"
     Then the w3c link checker reports compliance
+      | exceptions  |
+      | addthis.com |
 
   Scenario: review the title
     Given I navigate to the page "bestiary/the-mermaid"

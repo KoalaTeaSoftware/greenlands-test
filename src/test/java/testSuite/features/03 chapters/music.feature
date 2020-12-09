@@ -4,7 +4,11 @@ Feature: Chapter: Music
   Scenario: See that the page is complete
     Given I navigate to the page "music"
     Then the page title is "Music"
-    And the secondary nav links are present
+
+  Scenario: HTML syntax veracity
+  if the request of data from the CMS fails, it is likely that the HTML will be invalid
+    Given the w3C HTML tester reviews the file "music"
+    Then the w3c HTML tester reports compliance
 
   Scenario: See that the images are correctly shown
   This is a minor risk as the image files are not even served up from a CDN provided through WordPress
@@ -20,3 +24,5 @@ Feature: Chapter: Music
   There are one, or two links that are specific to the page
     Given the w3c link checker reviews the file "music"
     Then the w3c link checker reports compliance
+      | exceptions      |
+      | amazon-adsystem |

@@ -9,6 +9,7 @@ Feature: Chapter: Lore: List Page: Contents
   Scenario: Review the images in the list
     Then all images are well formed
 
+  @wip
   Scenario: Review each list entry
   In the interest of efficiency, this combines a handful of rules about the content of the list entries
   Aside from the size criteria, there is a rule about the presence of a video
@@ -19,6 +20,7 @@ Feature: Chapter: Lore: List Page: Contents
       | minNumberImages  | 1  |
       | maxNumberImages  | 1  |
 
+  @wip
   Scenario Outline: Follow some links
     When I follow a lore link for item entitled "<linkText>"
     Then the page title is "<expectedTitle>"

@@ -18,7 +18,7 @@ public class SecondaryNav {
     public void theSecondaryNavLinksArePresent() {
 
         Assert.assertTrue("The contact link should be visible", me.contactLink.isEnabled());
-        Assert.assertTrue("The membership link should be visible", me.membershipLink.isEnabled());
+//        Assert.assertTrue("The membership link should be visible", me.membershipLink.isEnabled());
         Assert.assertTrue("The policies link should be visible", me.policyLink.isEnabled());
     }
 

@@ -4,8 +4,7 @@ Feature: Contact form
 
   Scenario: See that the page is complete
     Given I navigate to the page "contact"
-    Then the page title is "The Greenlands | contact"
-    And the secondary nav links are present
+    Then the page title is "Contact"
 
   Scenario: HTML Compliance with W3C standards
     Given the w3C HTML tester reviews the file "contact"
@@ -15,6 +14,8 @@ Feature: Contact form
   There are one, or two links that are specific to the page
     Given the w3c link checker reviews the file "contact"
     Then the w3c link checker reports compliance
+      | exceptions |
+
 
   @wip
   Scenario: all the various form entry stuff

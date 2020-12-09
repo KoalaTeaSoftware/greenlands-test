@@ -24,4 +24,6 @@ Feature: Chapter: Lore: Detail Page
   This may fail with some error relating to the addthis widget. This does not appear to compromise it operation
     Given the w3c link checker reviews the file "lore/a-potted-history-of-the-greenlands"
     Then the w3c link checker reports compliance
+      | exceptions  |
+      | addthis.com |
 

@@ -14,6 +14,7 @@ Feature: Chapter: Home
   Scenario: Check links on a page
     Given the w3c link checker reviews the file ""
     Then the w3c link checker reports compliance
+      | exceptions |
 
   Scenario Outline: Follow chapter links and see that we get the right chapter
   The home page is, basically, a graphical chapter navigator

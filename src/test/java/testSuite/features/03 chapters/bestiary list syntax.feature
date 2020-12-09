@@ -15,3 +15,5 @@ Feature: Chapter: Bestiary: List Page Syntax
 #  Scenario: Check links on a page
 #    Given the w3c link checker reviews the file "bestiary"
 #    Then the w3c link checker reports compliance
+#      | exceptions        |
+#      | www.instagram.com |

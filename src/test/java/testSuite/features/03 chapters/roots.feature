@@ -5,7 +5,6 @@ Feature: Chapter: Roots
   Scenario: See that the page is complete
     Given I navigate to the page "roots"
     Then the page title is "Roots"
-    And the secondary nav links are present
 
   Scenario: See that the images are correctly shown
   This is a minor risk as the image files are not even served up from a CDN provided through WordPress
@@ -20,4 +19,6 @@ Feature: Chapter: Roots
   There are one, or two links that are specific to the page
     Given the w3c link checker reviews the file "roots"
     Then the w3c link checker reports compliance
+      | exceptions        |
+      | www.instagram.com |
 

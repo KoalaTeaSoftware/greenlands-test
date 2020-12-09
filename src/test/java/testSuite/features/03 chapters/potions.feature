@@ -1,10 +1,9 @@
-@wip
-Feature: Chapter: Medicine
+@functional
+Feature: Chapter: Potions
 
   Scenario: See that the page is complete
     Given I navigate to the page "potions"
     Then the page title is "Potions"
-    And the secondary nav links are present
 
   Scenario: See that the images are correctly shown
   This is a minor risk as the image files are not even served up from a CDN provided through WordPress
@@ -19,3 +18,5 @@ Feature: Chapter: Medicine
   There are one, or two links that are specific to the page
     Given the w3c link checker reviews the file "potions"
     Then the w3c link checker reports compliance
+      | exceptions  |
+      | addthis.com |
