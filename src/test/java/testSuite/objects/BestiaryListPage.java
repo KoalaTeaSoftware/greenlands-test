@@ -17,7 +17,7 @@ public class BestiaryListPage extends GreenlandsCommonPage {
     private final By itemVideoList = By.tagName("iframe");
 
     // Housekeeping
-    public BestiaryListPage(WebDriver driver) { super(driver, By.xpath("//BODY[@id='bestiary']")); }
+    public BestiaryListPage(WebDriver driver) { super(By.xpath("//BODY[@id='bestiary']")); }
 
     private By specificLink(String text) {
         return By.xpath("//*[@id='creatureList']//*[contains(@class,'beastListItem')]//h2/a[normalize-space(text())='" + text + "']");

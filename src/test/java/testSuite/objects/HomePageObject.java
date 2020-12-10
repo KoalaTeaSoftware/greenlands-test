@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 
 public class HomePageObject extends GreenlandsCommonPage {
     public HomePageObject() {
-        super(); //use the default common page's diagnostic element
+        super(By.xpath("//BODY[@id='home']"));
     }
 
     // locators
