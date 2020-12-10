@@ -40,8 +40,14 @@ public class InstagramSteps {
         for (WebElement img : instagramWidget.getImageList()) {
             img.click();
             String newTitle = instagramWidget.readPageTitle(1).toLowerCase();
-            boolean titleIsGood = (newTitle.contains("the greenlands") && newTitle.contains("instagram"));
-            sa.assertTrue(titleIsGood, "Image  " + index + " leads you to an unexpected page titled " + newTitle);
+            if (!(newTitle.contains("the greenlands") && newTitle.contains("instagram"))) {
+                sa.fail(
+                        String.format("For img link index %d, the Title of the new tab \"%s\" should contain \"the " +
+                                        "greenlands\" and \"instagram\", but does not",
+                                index, newTitle
+                        )
+                );
+            }
             index++;
         }
         sa.assertAll();
@@ -59,7 +65,12 @@ public class InstagramSteps {
         InstagramWidget instagramWidget = new InstagramWidget(Context.defaultDriver);
 
         String newTitle = instagramWidget.readPageTitle(1).toLowerCase();
-        boolean titleIsGood = (newTitle.contains("the greenlands") && newTitle.contains("instagram"));
-        Assert.assertTrue("Unexpected page titled " + newTitle + " in the new tab", titleIsGood);
+        if (!(newTitle.contains("the greenlands") && newTitle.contains("instagram"))) {
+            Assert.fail(
+                    "The Title of the new tab (" +
+                            newTitle +
+                            ")should contain \"the greenlands\" and \"instagram\", but does not"
+            );
+        }
     }
 }

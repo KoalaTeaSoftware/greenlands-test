@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 public class BestiaryDetailPage extends GreenlandsCommonPage {
     // housekeeping
     public BestiaryDetailPage(WebDriver driver) {
-        super(driver, By.xpath("//BODY[@id='bestiaryDetail']"));
+        super(By.xpath("//BODY[@id='bestiaryDetail']"));
     }
 
     // locators

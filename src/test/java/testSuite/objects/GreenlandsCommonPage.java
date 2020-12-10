@@ -1,9 +1,6 @@
 package testSuite.objects;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import testFramework.Context;
-import testFramework.helpers.WebElements;
 import testFramework.objects.HtmlPageObject;
 
 /**
@@ -11,27 +8,21 @@ import testFramework.objects.HtmlPageObject;
  * Also, wait for the last thing to be part of the DOM
  */
 public class GreenlandsCommonPage extends HtmlPageObject {
-    @SuppressWarnings("FieldCanBeLocal")
-    private final By defaultDiagnosticLocator = By.id("policyLink");
-
     /**
      * in normal usage, we will be using the default driver and the default diagnostic locator, so make life easy for
      * everyone
      */
-    public GreenlandsCommonPage() {
-        super();
-        WebElements.waitForPresence(Context.defaultDriver, defaultDiagnosticLocator);
-    }
+    //    public GreenlandsCommonPage() {
+    //        super(By.id("policyLink"));
+    //    }
 
     /**
      * Occasionally, we may need to specify a different diagnostic locator.
      *
-     * @param driver            - maybe the one in the context
      * @param diagnosticLocator - a By, the presence of which, tells if the page has been drawn
      */
-    public GreenlandsCommonPage(WebDriver driver, By diagnosticLocator) {
-        super();
-        WebElements.waitForPresence(driver, diagnosticLocator);
+    public GreenlandsCommonPage(By diagnosticLocator) {
+        super(diagnosticLocator);
     }
 
 }

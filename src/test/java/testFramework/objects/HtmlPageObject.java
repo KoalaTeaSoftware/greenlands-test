@@ -16,37 +16,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HtmlPageObject {
-    public final WebDriver myDriver;
+    public final WebDriver myDriver = Context.defaultDriver;
 
     public HtmlPageObject() {
-        this.myDriver = Context.defaultDriver;
         // OK, Selenium is supposed to do this, but let's make it specific
-        waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
         waitTillDrawn(By.tagName("BODY"));
-    }
-
-    public HtmlPageObject(By diagnostic) {
-        this.myDriver = Context.defaultDriver;
         waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
+    }
+
+    /**
+     * This constructor will wait until the diagnostic element is drawn (probably meaning it is present) and then wait
+     * until the browser report that the page state is complete.
+     * This should be efficacious with the abominably slow pages (e.g. those relying on wordpress)
+     *
+     * @param diagnostic - a WebElement that, if present, strongly implies that the page is of the right kind
+     */
+    public HtmlPageObject(By diagnostic) {
+        // wait until the diagnostic element is present (the page could be horribly slow)
         waitTillDrawn(diagnostic);
+        // Wait until the browser thinks that it has finished with this (new?) page
+        waitForJavaScriptReadyStateComplete(Context.pageLoadWait);
     }
 
-    private void waitTillDrawn(By diagnostic) {
-        new WebDriverWait(
-                Context.defaultDriver,
-                Duration.ofSeconds(Context.pageLoadWait))
-                // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
-                .until(
-                        ExpectedConditions.presenceOfElementLocated(diagnostic)
-                );
-    }
-
-
+    /**
+     * Most of the time, the operations will be going on in one tab. This will return the title of that tab
+     *
+     * @return - the title of tab zero
+     */
     public String readPageTitle() {
         return myDriver.getTitle();
     }
 
     /**
+     * If a nav operation has opened in a new tab, then this can be used to get the title of that new tab
+     *
      * @param tabIndex - staring at zero
      * @return the contents of the title tag for the indexed tab
      * @throws IndexOutOfBoundsException - if you ask for a tab that is not there
@@ -84,7 +87,7 @@ public class HtmlPageObject {
      * so this explicitly asks the browser if it thinks it has got everything
      * <p>
      * Even this may be less help than you like, so it may be good to override it in your own page object definitions with
-     * an explicit wait for the visibility of something that you know is slow for example
+     * an explicit wait for the visibility of something that you know is slow for example:
      * <p>
      * WebDriverWait wait = new WebDriverWait(driver, 10);
      * WebElement elem = driver.findElement(By.id("diagnosticElement"));
@@ -105,7 +108,8 @@ public class HtmlPageObject {
                     state = js.executeScript("return document.readyState").toString();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Reports.writeToHtmlReport("Failed to get document state " + e.getMessage());
+                    Reports.writeToHtmlReport("Failed to get document state " + e.getMessage() + ", but continuing to" +
+                            " try");
                     // Right at the beginning, if the browser has got nothing yet.
                     // we may hit "org.openqa.selenium.JavascriptException: javascript error: Cannot read property 'outerHTML' of null"
                     // In this case, we do not stop waiting.
@@ -114,6 +118,7 @@ public class HtmlPageObject {
                     return;
                 } else {
                     try {
+                        System.out.println("Still waiting for the JavaScript to say complete. It is currently " + state + ".");
                         Thread.sleep(1000);
                     } catch (InterruptedException ignored) {
                         // don't care
@@ -137,14 +142,25 @@ public class HtmlPageObject {
                         "typeof arguments[0].naturalWidth != \"undefined\" && " +
                         "arguments[0].naturalWidth > 0", imgTag);
 
-        boolean loaded = false; // unless we can convert it to true
         if (result instanceof Boolean) {
-            loaded = (Boolean) result;
+            return (Boolean) result;
+        } else {
+            return false;
         }
-        return loaded;
     }
 
     public List<WebElement> listImgTags() {
         return myDriver.findElements(By.tagName("IMG"));
     }
+
+    private void waitTillDrawn(By diagnostic) {
+        new WebDriverWait(
+                Context.defaultDriver,
+                Duration.ofSeconds(Context.pageLoadWait))
+                // use the 'presence', i.e. is the element actually in the DOM - it may not be visible
+                .until(
+                        ExpectedConditions.presenceOfElementLocated(diagnostic)
+                );
+    }
+
 }

@@ -1,7 +1,6 @@
 package testSuite.steps;
 
 import io.cucumber.java.en.When;
-import testSuite.objects.GreenlandsCommonPage;
 import testSuite.objects.HomePageObject;
 
 public class HomePageSteps {
@@ -12,8 +11,6 @@ public class HomePageSteps {
     @When("I go to the chapter called {string}")
     public void iGoToTheChapterCalled(String chapterName) {
         homePageObject.getLinkForChapter(chapterName).click();
-        // cause it to wait for the new page
-        GreenlandsCommonPage newPage = new GreenlandsCommonPage();
     }
 
 }

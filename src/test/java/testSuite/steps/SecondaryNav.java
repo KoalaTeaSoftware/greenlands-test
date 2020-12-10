@@ -4,7 +4,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
-import testSuite.objects.GreenlandsCommonPage;
 import testSuite.objects.SecondaryNavWidget;
 
 public class SecondaryNav {
@@ -27,9 +26,6 @@ public class SecondaryNav {
         try {
             // although the link is likely to be off the bottom of the page, bth FFx and Chrome will let you click on it
             me.followLink(linkName);
-            // This may result in a new page being show, this may take a while.
-            // So invoke the 'wait for a Greenlands' page that we know and love
-            GreenlandsCommonPage throwAwayPage = new GreenlandsCommonPage();
         } catch (NoSuchElementException e) {
             Assert.fail("Unable to find secondary nave item named :" + linkName + ": " + e.getMessage());
         }
