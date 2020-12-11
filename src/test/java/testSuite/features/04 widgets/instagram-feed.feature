@@ -14,13 +14,13 @@ Feature: Widget: Instagram Feed
     And the instagram images are fully drawn
 
   Scenario: Follow the individual Instagram links
-  Each image should take you to an instagram page.
+  Each image should take you to an instagram page fo the greenlands.
   There is no sensible way of embedding the information into this Gherkin, so roll it all into one step
   This will have to click on a link and see that the new tab has a good title
   'Good' will have to be defined when the test step is being built
-    Then all the individual instagram image links get the expected page
+    Then all the individual instagram image links get a greenlands instagram page
 
   Scenario: follow the follow me button
   This should always take you to the Instagram home page, in a new tab
     When I follow the follow me on instagram CTA
-    Then the new page title is good
+    Then the new page is a greenlands instagram page

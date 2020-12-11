@@ -12,7 +12,6 @@ import testFramework.helpers.Reports;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HtmlPageObject {
@@ -47,25 +46,6 @@ public class HtmlPageObject {
         return myDriver.getTitle();
     }
 
-    /**
-     * If a nav operation has opened in a new tab, then this can be used to get the title of that new tab
-     *
-     * @param tabIndex - staring at zero
-     * @return the contents of the title tag for the indexed tab
-     * @throws IndexOutOfBoundsException - if you ask for a tab that is not there
-     */
-    public String readPageTitle(int tabIndex) throws IndexOutOfBoundsException {
-        String newTitle;
-        List<String> browserTabs = new ArrayList<>(myDriver.getWindowHandles());
-
-        myDriver.switchTo().window(browserTabs.get(tabIndex));
-
-        newTitle = myDriver.getTitle();
-        myDriver.close();
-        myDriver.switchTo().window(browserTabs.get(0));
-
-        return newTitle;
-    }
 
     public String readFirstHeader() {
         return myDriver.findElement(By.tagName("H1")).getText();
