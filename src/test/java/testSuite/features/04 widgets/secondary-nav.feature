@@ -18,7 +18,7 @@ Feature: Widget: Secondary Nav
     Given I navigate to the page "<startPoint>"
     And the page title is "<startingTitle>"
     When I follow the secondary nav with text "<buttonText>"
-    Then the page title is "<expectedTitle>"
+    Then the page title becomes "<expectedTitle>"
     Examples:
       | startPoint | startingTitle | buttonText | expectedTitle |
       |            |               | Contact    | Contact       |

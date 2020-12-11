@@ -4,6 +4,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 import testFramework.Context;
@@ -34,18 +35,36 @@ public class HtmlPageSteps {
 
     @Then("the page title is {string}")
     public void thePageTitleIs(String expected) {
-        if (expected.isEmpty()) {
-            try {
+        try {
+            if (expected.isEmpty()) {
                 expected = Context.sutConfiguration.getProperty("defaultTitle");
-                Assert.assertEquals("The page title is not as expected",
-                        expected,
-                        getMyPage().readPageTitle()
-                );
-            } catch (NoSuchFieldException e) {
-                Assert.fail("The expected title has to be defined either in SUT configuration, or in the test step");
             }
+            Assert.assertEquals("Title not as expected", expected, getMyPage().readPageTitle());
+        } catch (NoSuchFieldException e) {
+            Assert.fail("The expected title has to be defined either in SUT configuration, or in the test step");
         }
-        Assert.assertEquals("Title not as expected", expected, getMyPage().readPageTitle());
+    }
+
+    @Then("the page title becomes {string}")
+    public void thePageTitleBecomes(String expected) {
+        try {
+            if (expected.isEmpty()) {
+                expected = Context.sutConfiguration.getProperty("defaultTitle");
+            }
+            getMyPage().waitForPageTitleToBe(expected);
+        } catch (NoSuchFieldException e) {
+            Assert.fail("The expected title has to be defined either in SUT configuration, or in the test step");
+        } catch (TimeoutException e) {
+            // want this to be a controlled exit
+            Assert.fail(
+                    String.format("Page title (%s) never became as expected (%s)", getMyPage().readPageTitle(), expected)
+            );
+        }
+        // but I don't want it to ever get away with it
+        Assert.assertEquals(
+                String.format("Page title (%s) should be (%s)", getMyPage().readPageTitle(), expected),
+                expected, getMyPage().readPageTitle()
+        );
     }
 
     @And("the first heading is {string}")
@@ -100,4 +119,5 @@ public class HtmlPageSteps {
         }
         sa.assertAll();
     }
+
 }
