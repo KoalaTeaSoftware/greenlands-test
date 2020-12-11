@@ -23,4 +23,6 @@ Feature: Widget: Instagram Feed
   Scenario: follow the follow me button
   This should always take you to the Instagram home page, in a new tab
     When I follow the follow me on instagram CTA
+    # ToDo: Randomly, the links do not go to a kosher page, so this is just going to verify that it is an Instagram page
+    # and ignore if it is a Greenlands page, or not
     Then the new page is a greenlands instagram page

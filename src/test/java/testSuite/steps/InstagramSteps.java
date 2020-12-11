@@ -4,9 +4,11 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 import testFramework.Context;
+import testFramework.helpers.Reports;
 import testFramework.objects.BrowserObject;
 import testSuite.objects.InstagramPage;
 import testSuite.objects.InstagramWidget;
@@ -48,10 +50,11 @@ public class InstagramSteps {
 
             browserObject.waitForTabCount(2);
             browserObject.switchToTabIndexedBy(1); // note this index starts at zero;
-            InstagramPage instagramPage = new InstagramPage();
-
-            if (!instagramPage.readPageTitle().toLowerCase().contains("the greenlands")) {
-                sa.fail(String.format(m, index, instagramPage.readPageTitle()));
+            try {
+                InstagramPage instagramPage = new InstagramPage();
+            } catch (TimeoutException e) {
+                sa.fail("Failed to get a suitable Instagram page for image index number " + index);
+                Reports.writeScreenShotToHtmlReport("This is the faulty page");
             }
 
             browserObject.closeCurrentTab(); // make sure that we only have 1 tab
