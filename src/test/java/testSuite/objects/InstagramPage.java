@@ -1,5 +1,7 @@
 package testSuite.objects;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import testFramework.Context;
@@ -19,18 +21,18 @@ public class InstagramPage extends HtmlPageObject {
                 .until(
                         ExpectedConditions.titleContains("Instagram")
                 );
-        // It wll make an Instagram page first, the populate it with specific stuff
-        // Separate it out into 2 like this to make it easier to debug
-
-        // 2020-12-11 I am having to comment this out because I am finding that, randomly links occasionally fail to
-        // work
-        //        new WebDriverWait(
-        //                Context.defaultDriver,
-        //                Duration.ofSeconds(Context.pageLoadWait))
-        //                // the string it is looking for is taken from an actual sample, and is assumed to be case sensitive
-        //                .until(
-        //                        ExpectedConditions.titleContains("Greenlands")
-        //                );
-
     }
+
+    /**
+     * @return - true means that it found the tell-tale words, false means it did not - this could be less than reliable
+     */
+    public boolean botWarningPresent() {
+        try {
+            Context.defaultDriver.findElements(By.xpath("//p[@text='Please wait a few minutes before you try again']"));
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+        return true;
+    }
+
 }

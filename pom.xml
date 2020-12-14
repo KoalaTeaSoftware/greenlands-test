@@ -94,18 +94,13 @@
             <version>20190722</version>
         </dependency>
 
-        <!-- for the soft asserts -->
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.1.0</version>
-            <scope>test</scope>
-        </dependency>
+        <!-- avoid using TestNG to get soft asserts. It will cause headaches with the build succeeding no mater if tests fail -->
 
     </dependencies>
 
     <build>
         <plugins>
+            <!-- The following tow allow Maven to know how to run the cucumber tests -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -118,7 +113,6 @@
             </plugin>
 
             <plugin>
-                <!-- to allow Maven to know how to run the cucumber tests -->
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>

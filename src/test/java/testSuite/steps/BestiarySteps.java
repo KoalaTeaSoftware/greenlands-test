@@ -5,8 +5,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
-import org.testng.asserts.SoftAssert;
 import testFramework.Context;
+import testFramework.helpers.SoftAssert;
 import testSuite.objects.BestiaryDetailPage;
 import testSuite.objects.BestiaryListPage;
 
@@ -70,7 +70,7 @@ public class BestiarySteps {
             final List<WebElement> listOfImages = myPage.getItemImageList(listItem);
             final List<WebElement> listOfCaptions = myPage.getItemCaptionList(listItem);
 
-            sa.assertEquals(listOfImages.size(), listOfCaptions.size(),
+            sa.assertTrue((listOfImages.size() == listOfCaptions.size()),
                     String.format(
                             "For beast %d, the list of images and list of captions differ in length (%d, %d respectively)",
                             beastIdx, listOfImages.size(), listOfCaptions.size())

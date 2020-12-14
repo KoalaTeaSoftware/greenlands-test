@@ -6,8 +6,8 @@ import io.cucumber.java.en.Then;
 import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.testng.asserts.SoftAssert;
 import testFramework.Context;
+import testFramework.helpers.SoftAssert;
 import testFramework.helpers.resourceLocator;
 import testFramework.objects.HtmlPageObject;
 

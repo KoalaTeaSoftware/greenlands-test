@@ -6,9 +6,9 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
-import org.testng.asserts.SoftAssert;
 import testFramework.Context;
 import testFramework.helpers.Reports;
+import testFramework.helpers.SoftAssert;
 import testFramework.objects.BrowserObject;
 import testSuite.objects.InstagramPage;
 import testSuite.objects.InstagramWidget;
@@ -53,7 +53,7 @@ public class InstagramSteps {
             try {
                 InstagramPage instagramPage = new InstagramPage();
             } catch (TimeoutException e) {
-                sa.fail("Failed to get a suitable Instagram page for image index number " + index);
+                Assert.fail("Failed to get a suitable Instagram page for image index number " + index);
                 Reports.writeScreenShotToHtmlReport("This is the faulty page");
             }
 
@@ -81,11 +81,16 @@ public class InstagramSteps {
 
         InstagramPage instagramPage = new InstagramPage();
 
-        if (!instagramPage.readPageTitle().toLowerCase().contains("the greenlands")) {
+        try {
+            instagramPage.waitForPageTitleToContain("The Greenlands");
+        } catch (TimeoutException e) {
             String msg = String.format(
-                    "The title of the new tab \"%s\" should contain \"the greenlands\" and \"instagram\", but does not",
+                    "The title of the new tab \"%s\" should contain \"The Greenlands\", but does not",
                     instagramPage.readPageTitle()
             );
+            if (instagramPage.botWarningPresent())
+                Reports.writeToHtmlReport("The 'bot rejection' message was present, so this may not be an error.");
+            Reports.writePageSourceToHtmlReport();
             Assert.fail(msg);
         }
     }

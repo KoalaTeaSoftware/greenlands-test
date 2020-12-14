@@ -58,6 +58,18 @@ public class HtmlPageObject {
                 .until(ExpectedConditions.titleIs(expectedTitle));
     }
 
+    /**
+     * Does not read the current one, but waits for it to be what you want it to be
+     *
+     * @param expectedTitle
+     */
+    public void waitForPageTitleToContain(String expectedTitle) {
+        new WebDriverWait(
+                Context.defaultDriver,
+                Duration.ofSeconds(Context.pageLoadWait))
+                .until(ExpectedConditions.titleContains(expectedTitle));
+    }
+
     public String readFirstHeader() {
         return myDriver.findElement(By.tagName("H1")).getText();
     }

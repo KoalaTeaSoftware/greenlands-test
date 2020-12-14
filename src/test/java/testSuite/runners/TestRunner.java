@@ -17,7 +17,8 @@ By default, Cucumber features/scenarios are run in the order:
 @CucumberOptions(
         strict = true,
         features = "src/test/java/testSuite/features", // all of the features in the test suite
-        glue = { // a list of package names, not directly related to file paths
+        glue = {
+                // a list of package names, not directly related to file paths
                 // the @Before and @After will not be run unless the package containing them is listed here
                 "testFramework",
                 "testSuite"
