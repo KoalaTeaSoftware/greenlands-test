@@ -9,6 +9,7 @@ Feature: Chapter: Bestiary: List Page: Contents
   Scenario: Count beast list items
     Then there are more than 7 beasts listed
 
+  @regression
   Scenario: Review the images in the list
     Given I navigate to the page "bestiary"
     Then all images are well formed
@@ -23,6 +24,7 @@ Feature: Chapter: Bestiary: List Page: Contents
       | minNumberImages  | 1  |
       | maxNumberImages  | 3  |
 
+  @regression
   Scenario Outline: Follow some details links
   This follows a sample, the implication is that if some work, they all work.
   This is not actually the case, as the links depend on the correct logging of the entry in the CMS

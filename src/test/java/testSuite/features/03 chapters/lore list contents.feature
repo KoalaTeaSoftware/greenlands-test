@@ -6,6 +6,7 @@ Feature: Chapter: Lore: List Page: Contents
     Given I navigate to the page "lore"
     And the page title is "Lore"
 
+  @regression
   Scenario: Review the images in the list
     Then all images are well formed
 

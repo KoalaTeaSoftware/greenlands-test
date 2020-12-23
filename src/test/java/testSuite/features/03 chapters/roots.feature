@@ -2,15 +2,13 @@
 Feature: Chapter: Roots
   This chapter has a very low risk of regression, as the content is pretty static
 
+  @regression
   Scenario: See that the page is complete
     Given I navigate to the page "roots"
     Then the page title is "Roots"
+    And all images are well formed
 
-  Scenario: See that the images are correctly shown
-  This is a minor risk as the image files are not even served up from a CDN provided through WordPress
-    Given I navigate to the page "roots"
-    Then all images are well formed
-
+  @regression
   Scenario: HTML Compliance with W3C standards
     Given the w3C HTML tester reviews the file "roots"
     Then the w3c HTML tester reports compliance

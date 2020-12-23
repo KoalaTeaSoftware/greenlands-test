@@ -5,6 +5,7 @@ Feature: Chapter: Lore: List Page: Syntax
   So the main risks are that list items are malformed. Therefore, verifying syntactic structure goes a long way to
   determining that the page build was successful
 
+  @regression
   Scenario: HTML syntax veracity
     # if the request of data from the CMS fails, it is likely that the HTML will be invalid
     Given the w3C HTML tester reviews the file "lore"

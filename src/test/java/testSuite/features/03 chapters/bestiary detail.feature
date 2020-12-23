@@ -6,10 +6,17 @@ Feature: Chapter: Bestiary: Detail Page
   determining that the page build was successful
   This is separated from the list contents just because the others make use of the Background Gherkin construction and this does not
 
+  @regression
   Scenario: HTML syntax veracity
   if the request of data from the CMS fails, it is likely that the HTML will be invalid
     Given the w3C HTML tester reviews the file "bestiary/the-mermaid"
     Then the w3c HTML tester reports compliance
+
+  @regression
+  Scenario: Review images
+    Given I navigate to the page "bestiary/the-troll"
+    Then the page title is "The Troll"
+    And all images are well formed
 
   Scenario: Check links on a page
   There are few links on the page (unless entered into the text using the CMS), only the secondary nav are to be expected
@@ -17,11 +24,3 @@ Feature: Chapter: Bestiary: Detail Page
     Then the w3c link checker reports compliance
       | exceptions  |
       | addthis.com |
-
-  Scenario: review the title
-    Given I navigate to the page "bestiary/the-mermaid"
-    Then the page title is "The Mermaid"
-
-  Scenario: Review images
-    Given I navigate to the page "bestiary/the-troll"
-    Then all images are well formed

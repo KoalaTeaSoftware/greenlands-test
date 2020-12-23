@@ -6,6 +6,7 @@ Feature: Chapter: Bestiary: List Page Syntax
   determining that the page build was successful
   This is separated from the list contents just because the others make use of the Background Gherkin construction and this does not
 
+  @regression
   Scenario: HTML syntax veracity
     # if the request of data from the CMS fails, it is likely that the HTML will be invalid
     Given the w3C HTML tester reviews the file "bestiary"

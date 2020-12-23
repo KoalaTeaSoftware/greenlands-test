@@ -6,18 +6,18 @@ Feature: Chapter: Lore: Detail Page
   determining that the page build was successful
   This is separated from the list contents just because the others make use of the Background Gherkin construction and this does not
 
-  Scenario: Review the title
-    Given I navigate to the page "lore/a-potted-history-of-the-greenlands"
-    Then the page title is "A Potted History Of The Greenlands"
-
-  Scenario: Review images
-    Given I navigate to the page "lore/a-potted-history-of-the-greenlands"
-    Then all images are well formed
-
+  @regression
+  # added to the regression suite as it is quick and a good diagnostic test
   Scenario: HTML syntax veracity
   If the request of data from the CMS fails, it is likely that the HTML will be invalid
     Given the w3C HTML tester reviews the file "lore/a-potted-history-of-the-greenlands"
     Then the w3c HTML tester reports compliance
+
+  @regression
+  Scenario: Review images
+    Given I navigate to the page "lore/a-potted-history-of-the-greenlands"
+    Then the page title is "A Potted History Of The Greenlands"
+    And all images are well formed
 
   Scenario: Check links on a page
   There are few links on the page (unless entered into the text using the CMS), only the secondary nav are to be expected

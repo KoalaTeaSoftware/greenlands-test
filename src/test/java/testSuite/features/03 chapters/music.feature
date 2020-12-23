@@ -1,9 +1,11 @@
 @feature
 Feature: Chapter: Music
 
+  @regression
   Scenario: See that the page is complete
     Given I navigate to the page "music"
     Then the page title is "Music"
+    And all images are well formed
 
 #  This page used Vue.js to build the page. The W3c Html validator does not like this
 # ToDo:
@@ -11,11 +13,6 @@ Feature: Chapter: Music
 #  if the request of data from the CMS fails, it is likely that the HTML will be invalid
 #    Given the w3C HTML tester reviews the file "music"
 #    Then the w3c HTML tester reports compliance
-
-  Scenario: See that the images are correctly shown
-  This is a minor risk as the image files are not even served up from a CDN provided through WordPress
-    Given I navigate to the page "music"
-    Then all images are well formed
 
   Scenario: Check links on a page
   There are one, or two links that are specific to the page

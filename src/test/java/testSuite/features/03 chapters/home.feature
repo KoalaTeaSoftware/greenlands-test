@@ -3,14 +3,17 @@ Feature: Chapter: Home
   This is the landing page for the site. It provide chapter navigation.
   There are various common elements, but these are their own feature
 
+  @regression
   Scenario: Observe the page
     Given I navigate to the page ""
     Then the page title is "The Greenlands"
 
+  @regression
   Scenario: HTML Compliance with W3C standards
     Given the w3C HTML tester reviews the file ""
     Then the w3c HTML tester reports compliance
 
+  @new
   Scenario: Check links on a page
     Given the w3c link checker reviews the file ""
     Then the w3c link checker reports compliance
