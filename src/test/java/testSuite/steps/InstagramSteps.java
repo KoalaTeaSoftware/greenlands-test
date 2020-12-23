@@ -13,6 +13,9 @@ import testFramework.objects.BrowserObject;
 import testSuite.objects.InstagramPage;
 import testSuite.objects.InstagramWidget;
 
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
 public class InstagramSteps {
 
     @Then("there are {int} instagram images")
@@ -38,9 +41,6 @@ public class InstagramSteps {
 
     @Then("all the individual instagram image links get a greenlands instagram page")
     public void allTheIndividualInstagramImageLinksGetAGreenlandsInstagramPage() {
-        final String m = "For img index number %d, the title of the new tab \"%s\" should contain \"the greenlands\" " +
-                "and \"instagram\", but does not";
-
         InstagramWidget instagramWidget = new InstagramWidget(Context.defaultDriver);
         BrowserObject browserObject = new BrowserObject();
         int index = 0;
@@ -60,6 +60,12 @@ public class InstagramSteps {
             browserObject.closeCurrentTab(); // make sure that we only have 1 tab
             browserObject.waitForTabCount(1); // belt and braces
             browserObject.switchToTabIndexedBy(0); // It must be told this, otherwise, it tries to use the closed tab
+            // have a go at adding a pause to try to fool the Instagram bot detector
+            Random r = new Random();
+            try {
+                TimeUnit.SECONDS.sleep(r.nextInt(60 - 30) + 30);
+            } catch (InterruptedException ignored) {
+            }
             index++;
         }
         sa.assertAll();
