@@ -12,7 +12,7 @@ Feature: Chapter: Battles: Main Page Syntax
 
   @new
   Scenario: Check links on a page
-    Given the w3c link checker reviews the file "battles"
+    Given the w3c link checker reviews the file "Battles"
     Then the w3c link checker reports compliance
       | exceptions |
 
