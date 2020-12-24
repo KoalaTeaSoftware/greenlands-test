@@ -20,5 +20,8 @@ Feature: Chapter: Battles: Main Page Syntax
   # included in regression as it is fairly quick and diagnostic of an error
   Scenario: Review images
     Given I navigate to the page "battles"
-    Then the page title becomes "battles"
-    And all images are well formed
+    Then the page title becomes "Battles"
+
+  Scenario: Review images
+    Given I navigate to the page "battles"
+    Then all images are well formed
